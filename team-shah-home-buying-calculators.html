@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ontario Home Buying Calculators | Payment, Land Transfer Tax & CMHC | Shah Team</title>
+  <meta name="description" content="Use Shah Team's Ontario home buying calculators to estimate mortgage payments, Ontario and Toronto land transfer tax, and CMHC mortgage insurance for Brampton, Mississauga, Toronto and GTA buyers.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://myshahteam.com/calculator/">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&family=Roboto+Slab:wght@400;600;700&display=swap');
+
+    :root {
+      --page: #ffffff;
+      --paper: #ffffff;
+      --ink: #0A2A51;
+      --soft-ink: #54595F;
+      --muted: #727377;
+      --text: #7A7A7A;
+      --line: #E2E8F0;
+      --blue: #6EC1E4;
+      --blue-soft: #EAF7FC;
+      --navy-soft: #F3F7FB;
+      --accent: #61CE70;
+      --accent-soft: #EEF9F1;
+      --warning: #B45309;
+      --warning-soft: #FFF7E8;
+      --shadow: 0 14px 35px rgba(10, 42, 81, 0.10);
+      --radius: 6px;
+      --sans: "Roboto", Arial, Helvetica, sans-serif;
+      --serif: "Roboto Slab", Georgia, "Times New Roman", serif;
+      --mono: "Courier New", Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--soft-ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .page-shell {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 24px;
+      align-items: center;
+      padding: clamp(24px, 5vw, 48px) 0 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 14px;
+      font-family: var(--serif);
+      color: var(--ink);
+      font-size: clamp(2rem, 4.4vw, 3.7rem);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-family: var(--serif);
+      color: var(--ink);
+      font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-copy strong {
+      color: var(--ink);
+    }
+
+    .hero-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--navy-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card p {
+      margin-bottom: 12px;
+      color: var(--soft-ink);
+    }
+
+    .phone-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .powered {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .calculator-shell {
+      margin: 0 0 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .calculator-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+      background: var(--navy-soft);
+    }
+
+    .tab-button {
+      min-height: 76px;
+      padding: 12px 16px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: transparent;
+      color: var(--soft-ink);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .tab-button:last-child {
+      border-right: 0;
+    }
+
+    .tab-button span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .tab-button strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .tab-button[aria-selected="true"] span,
+    .tab-button[aria-selected="true"] strong {
+      color: #fff;
+    }
+
+    .tool-section {
+      padding: clamp(16px, 3vw, 26px);
+      border-top: 0;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 8px;
+      max-width: 820px;
+      margin-bottom: 18px;
+    }
+
+    .section-head p {
+      margin-bottom: 0;
+      color: var(--soft-ink);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .input-panel,
+    .result-panel,
+    .plain-box,
+    .faq-card,
+    .source-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .input-panel,
+    .result-panel {
+      padding: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .field.wide {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-width: 0;
+      height: 44px;
+      padding: 0 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      color: var(--soft-ink);
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid rgba(110, 193, 228, 0.55);
+      outline-offset: 2px;
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .result-label {
+      margin: 0 0 6px;
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .result-value {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      color: var(--ink);
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      font-weight: 700;
+      line-height: 1.02;
+      overflow-wrap: anywhere;
+    }
+
+    .result-note {
+      margin: 0 0 16px;
+      color: var(--soft-ink);
+    }
+
+    .breakdown {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 9px;
+      border-bottom: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .breakdown-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .breakdown-row b {
+      color: var(--ink);
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .plain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .plain-box {
+      padding: 16px;
+      box-shadow: none;
+    }
+
+    .plain-box strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .plain-box p {
+      margin-bottom: 0;
+      color: var(--soft-ink);
+    }
+
+    .callout {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: var(--radius);
+      background: var(--blue-soft);
+      color: var(--soft-ink);
+    }
+
+    .warning {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: var(--warning-soft);
+      color: var(--warning);
+      font-size: 0.9rem;
+    }
+
+    .success {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+      color: #1F7A3F;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .mini-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .mini-cta p {
+      flex: 1 1 260px;
+      margin: 0;
+    }
+
+    .mini-cta a {
+      background: var(--blue);
+      color: var(--ink);
+    }
+
+    .content-section {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .faq-card {
+      padding: 16px;
+      box-shadow: none;
+    }
+
+    .faq-card p {
+      margin-bottom: 0;
+      color: var(--soft-ink);
+    }
+
+    .source-panel {
+      padding: 18px;
+    }
+
+    .source-panel ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .source-panel li + li {
+      margin-top: 6px;
+    }
+
+    .author-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .author-box p {
+      margin-bottom: 0;
+      color: var(--soft-ink);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .tool-grid,
+      .author-box {
+        grid-template-columns: 1fr;
+      }
+
+      .plain-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page-shell {
+        padding: 14px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator-tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-button {
+        min-height: 58px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .tab-button:last-child {
+        border-bottom: 0;
+      }
+
+      .breakdown-row {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .breakdown-row b {
+        text-align: left;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://myshahteam.com/calculator/#webpage",
+        "url": "https://myshahteam.com/calculator/",
+        "name": "Ontario Home Buying Calculators",
+        "description": "Ontario home buying calculators for mortgage payments, land transfer tax and CMHC mortgage insurance for Brampton, Mississauga, Toronto and GTA buyers.",
+        "inLanguage": "en-CA",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Shah Team",
+          "url": "https://myshahteam.com/"
+        },
+        "about": [
+          "Ontario mortgage payment calculator",
+          "Ontario land transfer tax calculator",
+          "Toronto municipal land transfer tax calculator",
+          "CMHC mortgage insurance calculator"
+        ],
+        "author": {
+          "@type": "Person",
+          "name": "Gaurang Shah",
+          "jobTitle": "Real Estate Broker",
+          "worksFor": {
+            "@type": "RealEstateAgent",
+            "name": "Shah Team"
+          }
+        }
+      },
+      {
+        "@type": "RealEstateAgent",
+        "@id": "https://myshahteam.com/#realestateagent",
+        "name": "Shah Team Real Estate",
+        "url": "https://myshahteam.com/",
+        "telephone": "+1-647-892-2411",
+        "email": "mail@myshahteam.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "10 Cottrelle Blvd #302",
+          "addressLocality": "Brampton",
+          "addressRegion": "ON",
+          "postalCode": "L6S 0E2",
+          "addressCountry": "CA"
+        },
+        "areaServed": ["Brampton", "Mississauga", "Toronto", "GTA", "Ontario"]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://myshahteam.com/calculator/#app",
+        "name": "Ontario Home Buying Calculators",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "url": "https://myshahteam.com/calculator/",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CAD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://myshahteam.com/calculator/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does the mortgage payment estimate include property tax and utilities?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The payment calculator estimates principal and interest only. Property tax, utilities, insurance and condo fees are separate carrying costs unless a lender or broker builds them into a full affordability review."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do Brampton and Mississauga buyers pay Toronto land transfer tax?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Brampton and Mississauga buyers pay Ontario land transfer tax, but not Toronto municipal land transfer tax. Toronto MLTT applies to properties inside the City of Toronto boundary."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When is CMHC mortgage insurance required?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CMHC mortgage insurance is usually required when the down payment is less than 20 percent and the home is eligible for an insured mortgage. The premium protects the lender, not the buyer, and is usually added to the mortgage."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://myshahteam.com/calculator/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://myshahteam.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Calculator",
+            "item": "https://myshahteam.com/calculator/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="page-shell" id="top">
+    <section class="hero" aria-labelledby="pageTitle">
+      <div>
+        <p class="eyebrow">Ontario home buying calculators</p>
+        <h1 id="pageTitle">Know the numbers before you fall in love with the home.</h1>
+        <p class="hero-copy">Use these simple Ontario calculators to estimate your mortgage payment, land transfer tax and CMHC mortgage insurance. They are built for Brampton, Mississauga, Toronto and GTA buyers who want a straight answer before making an offer.</p>
+        <p class="hero-copy"><strong>My view:</strong> your down payment gets you in the door. The payment, land transfer tax, CMHC premium and closing cash decide whether the plan actually works.</p>
+      </div>
+      <aside class="hero-card" aria-label="Call Gaurang">
+        <h2 style="font-size:1.55rem;margin-bottom:8px;">Small questions are welcome.</h2>
+        <p>You do not need to be ready to buy tomorrow. If one number here does not make sense, call or text me before you build your budget around the wrong assumption.</p>
+        <a class="phone-link" href="tel:+16478922411">Call Gaurang: 647-892-2411</a>
+        <p class="powered">Powered by Shah Team</p>
+      </aside>
+    </section>
+
+    <section class="calculator-shell" aria-label="Residential home buying calculators">
+      <div class="calculator-tabs" role="tablist" aria-label="Choose a calculator">
+        <button class="tab-button" id="tab-payment" type="button" role="tab" aria-selected="true" aria-controls="payment-calculator" data-tab="payment-calculator">
+          <span>Calculator 1</span>
+          <strong>Payment Calculator</strong>
+        </button>
+        <button class="tab-button" id="tab-ltt" type="button" role="tab" aria-selected="false" aria-controls="land-transfer-tax-calculator" data-tab="land-transfer-tax-calculator">
+          <span>Calculator 2</span>
+          <strong>Land Transfer Tax</strong>
+        </button>
+        <button class="tab-button" id="tab-cmhc" type="button" role="tab" aria-selected="false" aria-controls="cmhc-calculator" data-tab="cmhc-calculator">
+          <span>Calculator 3</span>
+          <strong>CMHC Insurance</strong>
+        </button>
+      </div>
+
+    <section class="tool-section" id="payment-calculator" role="tabpanel" aria-labelledby="tab-payment">
+      <div class="section-head">
+        <p class="eyebrow">Mortgage payment calculator</p>
+        <h2 id="paymentTitle">Estimate the payment before you start touring.</h2>
+        <p>This calculator shows the mortgage principal and interest payment. It does not include property tax, heat, insurance, utilities or condo fees, because those numbers need their own review.</p>
+      </div>
+
+      <div class="tool-grid">
+        <form class="input-panel" aria-label="Mortgage payment inputs">
+          <div class="form-grid">
+            <div class="field">
+              <label for="payPrice">Purchase price</label>
+              <input id="payPrice" type="number" min="0" step="1000" value="950000">
+            </div>
+            <div class="field">
+              <label for="payDown">Down payment</label>
+              <input id="payDown" type="number" min="0" step="1000" value="190000">
+            </div>
+            <div class="field">
+              <label for="payRate">Interest rate</label>
+              <input id="payRate" type="number" min="0" step="0.01" value="4.79">
+              <p class="hint">Use the rate you want to test.</p>
+            </div>
+            <div class="field">
+              <label for="payAmort">Amortization</label>
+              <select id="payAmort">
+                <option value="20">20 years</option>
+                <option value="25" selected>25 years</option>
+                <option value="30">30 years</option>
+              </select>
+            </div>
+            <div class="field wide">
+              <label for="payFrequency">Payment frequency</label>
+              <select id="payFrequency">
+                <option value="monthly" selected>Monthly</option>
+                <option value="biweekly">Bi-weekly</option>
+                <option value="weekly">Weekly</option>
+                <option value="acceleratedBiweekly">Accelerated bi-weekly</option>
+                <option value="acceleratedWeekly">Accelerated weekly</option>
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+          <p class="result-label">Estimated payment</p>
+          <p class="result-value" id="payResult">$0</p>
+          <p class="result-note" id="payResultNote">Mortgage principal and interest only.</p>
+          <dl class="breakdown">
+            <div class="breakdown-row"><dt>Mortgage amount</dt><dd><b id="payMortgage">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Down payment</dt><dd><b id="payDownPercent">0%</b></dd></div>
+            <div class="breakdown-row"><dt>Monthly equivalent</dt><dd><b id="payMonthlyEquivalent">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Estimated interest over amortization</dt><dd><b id="payInterest">$0</b></dd></div>
+          </dl>
+          <div class="warning hidden" id="payWarning"></div>
+        </aside>
+      </div>
+
+      <div class="plain-grid">
+        <div class="plain-box">
+          <strong>What buyers usually miss</strong>
+          <p>A mortgage payment is not the full cost of owning the home. Property tax, insurance, utilities, condo fees and repairs can change the real monthly number quickly.</p>
+        </div>
+        <div class="plain-box">
+          <strong>When to call</strong>
+          <p>If the payment looks comfortable but your down payment is under 20 percent, check the CMHC calculator too. The premium can change the mortgage amount.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-section hidden" id="land-transfer-tax-calculator" role="tabpanel" aria-labelledby="tab-ltt">
+      <div class="section-head">
+        <p class="eyebrow">Land transfer tax calculator</p>
+        <h2 id="lttTitle">Estimate Ontario LTT and whether Toronto MLTT applies.</h2>
+        <p>Toronto and GTA are not the same thing for land transfer tax. If the area is inside the City of Toronto, this calculator adds Toronto municipal land transfer tax automatically.</p>
+      </div>
+
+      <div class="tool-grid">
+        <form class="input-panel" aria-label="Land transfer tax inputs">
+          <div class="form-grid">
+            <div class="field">
+              <label for="lttPrice">Purchase price</label>
+              <input id="lttPrice" type="number" min="0" step="1000" value="950000">
+            </div>
+            <div class="field">
+              <label for="lttArea">Area</label>
+              <select id="lttArea">
+                <option value="Toronto" selected>Toronto</option>
+                <option value="North York">North York</option>
+                <option value="Scarborough">Scarborough</option>
+                <option value="Etobicoke">Etobicoke</option>
+                <option value="East York">East York</option>
+                <option value="York">York</option>
+                <option value="Brampton">Brampton</option>
+                <option value="Mississauga">Mississauga</option>
+                <option value="Caledon">Caledon</option>
+                <option value="Vaughan">Vaughan</option>
+                <option value="Markham">Markham</option>
+                <option value="Richmond Hill">Richmond Hill</option>
+                <option value="Oakville">Oakville</option>
+                <option value="Burlington">Burlington</option>
+                <option value="Hamilton">Hamilton</option>
+                <option value="Other Ontario city">Other Ontario city</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="lttFirstTime">First-time buyer?</label>
+              <select id="lttFirstTime">
+                <option value="yes" selected>Yes</option>
+                <option value="no">No</option>
+                <option value="not_sure">Not sure</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="lttPrimary">Primary residence?</label>
+              <select id="lttPrimary">
+                <option value="yes" selected>Yes</option>
+                <option value="no">No</option>
+                <option value="not_sure">Not sure</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="lttResidency">Residency status</label>
+              <select id="lttResidency">
+                <option value="citizen_or_pr" selected>Canadian citizen / PR</option>
+                <option value="foreign">Foreign / non-resident</option>
+                <option value="not_sure">Not sure</option>
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+          <p class="result-label">Estimated land transfer tax</p>
+          <p class="result-value" id="lttResult">$0</p>
+          <p class="result-note" id="lttResultNote">Ontario LTT plus Toronto MLTT if applicable.</p>
+          <dl class="breakdown">
+            <div class="breakdown-row"><dt>Ontario LTT before rebate</dt><dd><b id="lttOntarioGross">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Ontario first-time buyer rebate</dt><dd><b id="lttOntarioRebate">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Toronto MLTT before rebate</dt><dd><b id="lttTorontoGross">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Toronto first-time buyer rebate</dt><dd><b id="lttTorontoRebate">$0</b></dd></div>
+            <div class="breakdown-row hidden" id="lttForeignRow"><dt>Non-resident taxes estimate</dt><dd><b id="lttForeignTax">$0</b></dd></div>
+          </dl>
+          <div class="success" id="lttTorontoStatus">Toronto MLTT applies because the area selected is inside the City of Toronto.</div>
+        </aside>
+      </div>
+
+      <div class="plain-grid">
+        <div class="plain-box">
+          <strong>What buyers usually miss</strong>
+          <p>Brampton and Mississauga are in the GTA, but they are not the City of Toronto. A buyer there usually pays Ontario LTT only, not Toronto MLTT.</p>
+        </div>
+        <div class="plain-box">
+          <strong>When to call</strong>
+          <p>If you are not sure whether an address is inside Toronto, call me before you assume the tax. Boundary confusion can change the cash needed at closing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-section hidden" id="cmhc-calculator" role="tabpanel" aria-labelledby="tab-cmhc">
+      <div class="section-head">
+        <p class="eyebrow">CMHC insurance calculator</p>
+        <h2 id="cmhcTitle">Estimate the mortgage insurance premium most buyers forget.</h2>
+        <p>CMHC mortgage loan insurance is usually required when the down payment is under 20 percent on an eligible purchase. The premium is usually added to the mortgage, but Ontario tax on the premium is paid in cash at closing.</p>
+      </div>
+
+      <div class="tool-grid">
+        <form class="input-panel" aria-label="CMHC mortgage insurance inputs">
+          <div class="form-grid">
+            <div class="field">
+              <label for="cmhcPrice">Purchase price</label>
+              <input id="cmhcPrice" type="number" min="0" step="1000" value="800000">
+            </div>
+            <div class="field">
+              <label for="cmhcDown">Down payment</label>
+              <input id="cmhcDown" type="number" min="0" step="1000" value="80000">
+            </div>
+            <div class="field">
+              <label for="cmhcBuyer">Buyer type</label>
+              <select id="cmhcBuyer">
+                <option value="first_time" selected>First-time buyer</option>
+                <option value="repeat">Not first-time buyer</option>
+                <option value="not_sure">Not sure</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cmhcProperty">Property type</label>
+              <select id="cmhcProperty">
+                <option value="existing" selected>Existing / resale</option>
+                <option value="new_build">New build</option>
+              </select>
+            </div>
+            <div class="field wide">
+              <label for="cmhcAmort">Amortization</label>
+              <select id="cmhcAmort">
+                <option value="20">20 years</option>
+                <option value="25" selected>25 years</option>
+                <option value="30">30 years</option>
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+          <p class="result-label">Estimated CMHC premium</p>
+          <p class="result-value" id="cmhcResult">$0</p>
+          <p class="result-note" id="cmhcResultNote">Premium estimate for a standard owner-occupied purchase.</p>
+          <dl class="breakdown">
+            <div class="breakdown-row"><dt>Base mortgage</dt><dd><b id="cmhcBaseMortgage">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Premium rate used</dt><dd><b id="cmhcPremiumRate">0%</b></dd></div>
+            <div class="breakdown-row"><dt>Total mortgage after premium</dt><dd><b id="cmhcTotalMortgage">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Ontario tax on premium</dt><dd><b id="cmhcOntarioTax">$0</b></dd></div>
+            <div class="breakdown-row"><dt>Minimum down payment estimate</dt><dd><b id="cmhcMinDown">$0</b></dd></div>
+          </dl>
+          <div class="success" id="cmhcStatus">CMHC insurance is estimated because the down payment is under 20%.</div>
+        </aside>
+      </div>
+
+      <div class="plain-grid">
+        <div class="plain-box">
+          <strong>What buyers usually miss</strong>
+          <p>The premium protects the lender, not the buyer. Most buyers do not pay the full premium in cash, but Ontario tax on that premium can still be due at closing.</p>
+        </div>
+        <div class="plain-box">
+          <strong>When to call</strong>
+          <p>If your down payment is close to 20 percent, or the purchase price is close to $1.5 million, call before you rely on the estimate. One small change can move you into a different rule.</p>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <section class="content-section" aria-labelledby="closingCashTitle">
+      <p class="eyebrow">Before you make an offer</p>
+      <h2 id="closingCashTitle">The number in your head should match the number at the lawyer's office.</h2>
+      <div class="plain-grid">
+        <div class="plain-box">
+          <strong>Payment tells you the monthly pressure.</strong>
+          <p>That is the number you live with after closing. It should be tested with property tax, utilities, insurance, condo fees and repairs before you decide the home is comfortable.</p>
+        </div>
+        <div class="plain-box">
+          <strong>Land transfer tax tells you the closing pressure.</strong>
+          <p>This is one of the largest cash costs buyers underestimate. In Toronto, there can be two land transfer taxes. In Brampton and Mississauga, there is usually Ontario LTT only.</p>
+        </div>
+        <div class="plain-box">
+          <strong>CMHC tells you the mortgage pressure.</strong>
+          <p>If your down payment is under 20 percent, the premium can be added to the mortgage. That changes the amount you borrow and can slightly change the payment.</p>
+        </div>
+        <div class="plain-box">
+          <strong>A quick call can prevent a bad assumption.</strong>
+          <p>Small questions are welcome. You do not need to wait until you are ready to write an offer to ask whether a number makes sense.</p>
+        </div>
+      </div>
+      <div class="mini-cta">
+        <p><strong>Want me to sanity-check your numbers?</strong> Call or text Gaurang at 647-892-2411. It is better to ask early than be surprised after the offer is accepted.</p>
+        <a class="phone-link" href="tel:+16478922411">Call 647-892-2411</a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq" aria-labelledby="faqTitle">
+      <p class="eyebrow">Frequently asked questions</p>
+      <h2 id="faqTitle">Questions buyers actually ask about payments, land transfer tax and CMHC.</h2>
+      <div class="faq-grid">
+        <article class="faq-card">
+          <h3>Does the mortgage payment estimate include property tax and utilities?</h3>
+          <p>No. The payment calculator estimates principal and interest only. Property tax, utilities, insurance and condo fees are separate carrying costs. If you want the real monthly ownership number, you need to add those separately.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Why is my bank's payment different from this calculator?</h3>
+          <p>Your lender may use a different rate, payment frequency, compounding assumption, insurance premium, amortization or rounding. Use this as a planning estimate, then confirm the final payment with your mortgage professional.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Do Brampton and Mississauga buyers pay Toronto land transfer tax?</h3>
+          <p>No. Brampton and Mississauga buyers pay Ontario land transfer tax, but they do not pay Toronto municipal land transfer tax unless the property is inside the City of Toronto boundary.</p>
+        </article>
+        <article class="faq-card">
+          <h3>When does Toronto MLTT apply?</h3>
+          <p>Toronto MLTT applies when the property is inside the City of Toronto. Toronto, North York, Scarborough, Etobicoke, East York and York are treated as Toronto areas in this calculator.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Does the first-time buyer rebate remove all land transfer tax?</h3>
+          <p>Not always. The Ontario rebate is up to $4,000. Toronto has a separate first-time buyer rebate of up to $4,475. On many GTA prices, the rebate helps but does not remove the full tax.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Who confirms the final land transfer tax before closing?</h3>
+          <p>Your real estate lawyer confirms the final amount. This calculator is useful for planning, but your lawyer should confirm the exact tax, rebate eligibility and closing statement.</p>
+        </article>
+        <article class="faq-card">
+          <h3>When is CMHC mortgage insurance required?</h3>
+          <p>CMHC mortgage insurance is usually required when the down payment is less than 20 percent on an eligible insured mortgage. The premium protects the lender, not the buyer.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Is CMHC insurance paid upfront?</h3>
+          <p>The premium is usually added to the mortgage instead of being paid fully upfront. In Ontario, the sales tax on the premium is typically a cash closing cost, which surprises many first-time buyers.</p>
+        </article>
+        <article class="faq-card">
+          <h3>What happens if the purchase price is $1.5 million or more?</h3>
+          <p>CMHC insured mortgage rules generally do not apply at $1.5 million and above. Buyers usually need an uninsured mortgage and a larger down payment. Confirm the structure before making an offer.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Can I get a 30-year amortization with less than 20 percent down?</h3>
+          <p>CMHC notes that insured 30-year amortization is available for first-time buyers or new builds. If you are not a first-time buyer and the property is resale, confirm carefully with your mortgage broker.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Should I calculate payment or closing costs first?</h3>
+          <p>Do both before touring. Payment tells you whether the home is comfortable monthly. Closing costs tell you whether you have enough cash to complete the purchase.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Can I call if my question feels small?</h3>
+          <p>Yes. Small questions are often the ones that prevent expensive mistakes. Call or text Gaurang at 647-892-2411 if you want a number explained before you move forward.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="sourcesTitle">
+      <p class="eyebrow">Sources and verification</p>
+      <h2 id="sourcesTitle">Rules used in these estimates</h2>
+      <div class="source-panel">
+        <p>Last reviewed for this prototype: June 17, 2026. These calculators are for planning only and do not replace advice from your mortgage broker, lender, lawyer, accountant or tax professional.</p>
+        <ul>
+          <li><a href="https://www.ontario.ca/document/land-transfer-tax/calculating-land-transfer-tax">Government of Ontario: Calculating Land Transfer Tax</a></li>
+          <li><a href="https://www.ontario.ca/document/land-transfer-tax/refunds-first-time-homebuyers">Government of Ontario: First-time homebuyer land transfer tax refund</a></li>
+          <li><a href="https://www.toronto.ca/services-payments/property-taxes-utilities/municipal-land-transfer-tax-mltt/municipal-land-transfer-tax-mltt-rates-and-fees/">City of Toronto: MLTT and MNRST rates and fees</a></li>
+          <li><a href="https://www.toronto.ca/services-payments/property-taxes-utilities/municipal-land-transfer-tax-mltt/municipal-land-transfer-tax-mltt-rebate-opportunities/">City of Toronto: MLTT rebate opportunities</a></li>
+          <li><a href="https://www.cmhc-schl.gc.ca/consumers/home-buying/calculators/mortgage-calculator">CMHC: Mortgage payment calculator</a></li>
+          <li><a href="https://www.cmhc-schl.gc.ca/consumers/home-buying/calculators/mortgage-loan-insurance-premium-calculator">CMHC: Mortgage loan insurance premium calculator</a></li>
+        </ul>
+      </div>
+
+      <div class="author-box">
+        <div>
+          <h2 style="font-size:1.55rem;margin-bottom:8px;">About Gaurang Shah and Shah Team</h2>
+          <p>Gaurang Shah is a Real Estate Broker with Shah Team at Royal LePage Flower City Realty, helping first-time buyers, newcomers, move-up buyers and sellers across Brampton, Mississauga, Toronto and the GTA. The goal of this page is simple: help buyers understand the numbers before pressure, emotion or timing makes the decision harder.</p>
+        </div>
+        <a class="phone-link" href="tel:+16478922411">Ask a question</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const CONFIG = {
+      lttVerified: "2026-06-17",
+      cmhcVerified: "2026-06-17",
+      ontarioLtt: {
+        firstTimeBuyerRebateMax: 4000,
+        residentialBrackets: [
+          { upTo: 55000, rate: 0.005 },
+          { upTo: 250000, rate: 0.01 },
+          { upTo: 400000, rate: 0.015 },
+          { upTo: 2000000, rate: 0.02 },
+          { upTo: Infinity, rate: 0.025 }
+        ]
+      },
+      torontoMltt: {
+        firstTimeBuyerRebateMax: 4475,
+        mnrstRate: 0.10,
+        adminFee: 102.56,
+        adminFeeHstRate: 0.13,
+        residentialBrackets: [
+          { upTo: 55000, rate: 0.005 },
+          { upTo: 250000, rate: 0.01 },
+          { upTo: 400000, rate: 0.015 },
+          { upTo: 2000000, rate: 0.02 },
+          { upTo: 3000000, rate: 0.025 },
+          { upTo: 4000000, rate: 0.044 },
+          { upTo: 5000000, rate: 0.0545 },
+          { upTo: 10000000, rate: 0.065 },
+          { upTo: 20000000, rate: 0.0755 },
+          { upTo: Infinity, rate: 0.086 }
+        ]
+      },
+      nrstRate: 0.25,
+      ontarioPremiumTaxRate: 0.08,
+      cmhcPremiumRates: [
+        { maxLtv: 0.65, rate: 0.0060 },
+        { maxLtv: 0.75, rate: 0.0170 },
+        { maxLtv: 0.80, rate: 0.0240 },
+        { maxLtv: 0.85, rate: 0.0280 },
+        { maxLtv: 0.90, rate: 0.0310 },
+        { maxLtv: 0.95, rate: 0.0400 }
+      ]
+    };
+
+    const FREQUENCIES = {
+      monthly: { label: "month", paymentsPerYear: 12 },
+      biweekly: { label: "bi-weekly payment", paymentsPerYear: 26 },
+      weekly: { label: "week", paymentsPerYear: 52 },
+      acceleratedBiweekly: { label: "accelerated bi-weekly payment", paymentsPerYear: 26, acceleratedFromMonthly: 2 },
+      acceleratedWeekly: { label: "accelerated weekly payment", paymentsPerYear: 52, acceleratedFromMonthly: 4 }
+    };
+
+    const TORONTO_AREAS = new Set(["Toronto", "North York", "Scarborough", "Etobicoke", "East York", "York"]);
+
+    const moneyFormatter = new Intl.NumberFormat("en-CA", {
+      style: "currency",
+      currency: "CAD",
+      maximumFractionDigits: 0
+    });
+
+    const percentFormatter = new Intl.NumberFormat("en-CA", {
+      style: "percent",
+      maximumFractionDigits: 1
+    });
+
+    function num(id) {
+      const value = Number(document.getElementById(id).value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function val(id) {
+      return document.getElementById(id).value;
+    }
+
+    function money(value) {
+      return moneyFormatter.format(Number.isFinite(Number(value)) ? Number(value) : 0);
+    }
+
+    function round(value) {
+      return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+    }
+
+    function setText(id, text) {
+      document.getElementById(id).textContent = text;
+    }
+
+    function toggle(id, show) {
+      document.getElementById(id).classList.toggle("hidden", !show);
+    }
+
+    function calculateMarginal(amount, brackets) {
+      const taxable = Math.max(0, amount);
+      let previous = 0;
+      let tax = 0;
+
+      for (const bracket of brackets) {
+        const portion = Math.max(0, Math.min(taxable, bracket.upTo) - previous);
+        tax += portion * bracket.rate;
+        previous = bracket.upTo;
+        if (taxable <= bracket.upTo) break;
+      }
+
+      return round(tax);
+    }
+
+    function effectivePeriodicRate(annualRatePercent, paymentsPerYear) {
+      const annualRate = Math.max(0, annualRatePercent) / 100;
+      if (annualRate === 0) return 0;
+      return Math.pow(1 + annualRate / 2, 2 / paymentsPerYear) - 1;
+    }
+
+    function paymentForFrequency(principal, annualRatePercent, amortYears, paymentsPerYear) {
+      const loan = Math.max(0, principal);
+      const totalPayments = Math.max(1, Math.round(amortYears * paymentsPerYear));
+      const rate = effectivePeriodicRate(annualRatePercent, paymentsPerYear);
+
+      if (loan === 0) return 0;
+      if (rate === 0) return loan / totalPayments;
+      return (loan * rate) / (1 - Math.pow(1 + rate, -totalPayments));
+    }
+
+    function calculateMortgagePayment(principal, annualRate, amortYears, frequency) {
+      const selected = FREQUENCIES[frequency] || FREQUENCIES.monthly;
+      const monthlyPayment = paymentForFrequency(principal, annualRate, amortYears, 12);
+      const perPayment = selected.acceleratedFromMonthly
+        ? monthlyPayment / selected.acceleratedFromMonthly
+        : paymentForFrequency(principal, annualRate, amortYears, selected.paymentsPerYear);
+
+      return {
+        label: selected.label,
+        perPayment: round(perPayment),
+        monthlyEquivalent: round((perPayment * selected.paymentsPerYear) / 12),
+        paymentsPerYear: selected.paymentsPerYear
+      };
+    }
+
+    function renderPayment() {
+      const price = Math.max(0, num("payPrice"));
+      const down = Math.max(0, num("payDown"));
+      const principal = Math.max(0, price - down);
+      const rate = num("payRate");
+      const amort = num("payAmort");
+      const frequency = val("payFrequency");
+      const payment = calculateMortgagePayment(principal, rate, amort, frequency);
+      const downPercent = price > 0 ? down / price : 0;
+      const totalPaid = payment.perPayment * payment.paymentsPerYear * amort;
+      const interest = Math.max(0, totalPaid - principal);
+
+      setText("payResult", money(payment.perPayment));
+      setText("payResultNote", "Estimated per " + payment.label + ". Principal and interest only.");
+      setText("payMortgage", money(principal));
+      setText("payDownPercent", percentFormatter.format(downPercent));
+      setText("payMonthlyEquivalent", money(payment.monthlyEquivalent));
+      setText("payInterest", money(interest));
+
+      const warning = document.getElementById("payWarning");
+      if (downPercent > 0 && downPercent < 0.20) {
+        warning.textContent = "Your down payment is under 20%. Check the CMHC calculator because mortgage insurance may change the amount borrowed.";
+        toggle("payWarning", true);
+      } else {
+        toggle("payWarning", false);
+      }
+    }
+
+    function isTorontoArea(area) {
+      return TORONTO_AREAS.has(area);
+    }
+
+    function renderLtt() {
+      const price = Math.max(0, num("lttPrice"));
+      const area = val("lttArea");
+      const isToronto = isTorontoArea(area);
+      const eligibleRebate =
+        val("lttFirstTime") === "yes" &&
+        val("lttPrimary") === "yes" &&
+        val("lttResidency") === "citizen_or_pr";
+      const isForeign = val("lttResidency") === "foreign";
+      const ontarioBrackets = CONFIG.ontarioLtt.residentialBrackets;
+      const torontoBrackets = CONFIG.torontoMltt.residentialBrackets;
+      const ontarioGross = calculateMarginal(price, ontarioBrackets);
+      const ontarioRebate = eligibleRebate ? Math.min(ontarioGross, CONFIG.ontarioLtt.firstTimeBuyerRebateMax) : 0;
+      const torontoGross = isToronto ? calculateMarginal(price, torontoBrackets) : 0;
+      const torontoRebate = isToronto && eligibleRebate ? Math.min(torontoGross, CONFIG.torontoMltt.firstTimeBuyerRebateMax) : 0;
+      const nrst = isForeign ? price * CONFIG.nrstRate : 0;
+      const mnrst = isForeign && isToronto ? price * CONFIG.torontoMltt.mnrstRate : 0;
+      const total = ontarioGross - ontarioRebate + torontoGross - torontoRebate + nrst + mnrst;
+
+      setText("lttResult", money(total));
+      setText("lttOntarioGross", money(ontarioGross));
+      setText("lttOntarioRebate", "-" + money(ontarioRebate));
+      setText("lttTorontoGross", money(torontoGross));
+      setText("lttTorontoRebate", "-" + money(torontoRebate));
+      setText("lttForeignTax", money(nrst + mnrst));
+      toggle("lttForeignRow", isForeign);
+
+      const status = document.getElementById("lttTorontoStatus");
+      if (isToronto) {
+        status.textContent = area + " is treated as inside the City of Toronto for this calculator, so Toronto MLTT is included.";
+        status.className = "success";
+      } else {
+        status.textContent = area + " is not treated as City of Toronto here, so the estimate uses Ontario LTT only.";
+        status.className = "success";
+      }
+
+      if (val("lttFirstTime") === "not_sure" || val("lttPrimary") === "not_sure" || val("lttResidency") === "not_sure") {
+        status.textContent += " Because one eligibility answer is not sure, first-time buyer rebates are not included.";
+      }
+
+      setText("lttResultNote", isToronto ? "Ontario LTT plus Toronto MLTT estimate." : "Ontario LTT estimate. Toronto MLTT not applied.");
+    }
+
+    function minimumDownPayment(price) {
+      if (price <= 0) return 0;
+      if (price < 500000) return price * 0.05;
+      if (price < 1500000) return 25000 + (price - 500000) * 0.10;
+      return price * 0.20;
+    }
+
+    function cmhcPremiumRate(ltv) {
+      for (const bracket of CONFIG.cmhcPremiumRates) {
+        if (ltv <= bracket.maxLtv) return bracket.rate;
+      }
+      return null;
+    }
+
+    function renderCmhc() {
+      const price = Math.max(0, num("cmhcPrice"));
+      const down = Math.max(0, num("cmhcDown"));
+      const baseMortgage = Math.max(0, price - down);
+      const downPercent = price > 0 ? down / price : 0;
+      const ltv = price > 0 ? baseMortgage / price : 0;
+      const minDown = minimumDownPayment(price);
+      const amort = num("cmhcAmort");
+      const buyer = val("cmhcBuyer");
+      const property = val("cmhcProperty");
+      const canUseThirtyYearInsured = buyer === "first_time" || property === "new_build";
+      let premium = 0;
+      let rate = 0;
+      let status = "";
+      let unavailable = false;
+
+      if (price <= 0) {
+        status = "Enter a purchase price to estimate CMHC insurance.";
+      } else if (down < minDown) {
+        status = "The down payment appears below the minimum down payment estimate.";
+        unavailable = true;
+      } else if (price >= 1500000 && downPercent < 0.20) {
+        status = "CMHC insurance is generally not available at $1.5 million and above. Buyers usually need an uninsured mortgage.";
+        unavailable = true;
+      } else if (downPercent >= 0.20) {
+        status = "CMHC insurance is usually not required because the down payment is 20% or more.";
+      } else if (ltv > 0.95) {
+        status = "The loan-to-value is above the usual insured limit. Increase the down payment and confirm with a mortgage professional.";
+        unavailable = true;
+      } else if (amort > 25 && !canUseThirtyYearInsured) {
+        status = "CMHC notes that insured 30-year amortization is available for first-time buyers or new builds. Confirm this scenario before relying on it.";
+        unavailable = true;
+      } else {
+        rate = cmhcPremiumRate(ltv);
+        premium = rate ? baseMortgage * rate : 0;
+        status = "CMHC insurance is estimated because the down payment is under 20%.";
+      }
+
+      const premiumTax = premium * CONFIG.ontarioPremiumTaxRate;
+      const totalMortgage = baseMortgage + premium;
+
+      setText("cmhcResult", unavailable ? "Not available" : money(premium));
+      setText("cmhcBaseMortgage", money(baseMortgage));
+      setText("cmhcPremiumRate", rate ? percentFormatter.format(rate) : "0%");
+      setText("cmhcTotalMortgage", money(totalMortgage));
+      setText("cmhcOntarioTax", money(premiumTax));
+      setText("cmhcMinDown", money(minDown));
+      setText("cmhcStatus", status);
+      setText("cmhcResultNote", premium > 0 ? "Premium estimate. Ontario tax on the premium is shown separately." : "No premium estimate added for this scenario.");
+
+      const statusBox = document.getElementById("cmhcStatus");
+      statusBox.className = unavailable ? "warning" : "success";
+    }
+
+    function renderAll() {
+      renderPayment();
+      renderLtt();
+      renderCmhc();
+    }
+
+    function activateTab(panelId) {
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        const isActive = button.dataset.tab === panelId;
+        button.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      document.querySelectorAll(".tool-section[role='tabpanel']").forEach((panel) => {
+        panel.classList.toggle("hidden", panel.id !== panelId);
+      });
+    }
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        activateTab(button.dataset.tab);
+      });
+    });
+
+    document.querySelectorAll("input, select").forEach((control) => {
+      control.addEventListener("input", renderAll);
+      control.addEventListener("change", renderAll);
+    });
+
+    activateTab("payment-calculator");
+    renderAll();
+  </script>
+</body>
+</html>
