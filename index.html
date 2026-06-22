@@ -1365,7 +1365,7 @@
     .tool-cta-btn.secondary{background:#062b55;color:#fff}
     .tool-cta-btn.email-cta{background:#fff;color:#1B4F8A;border:2px solid #74c7ee;box-shadow:none}
     .tool-cta-btn.email-cta:hover{background:#f5fbff}
-    .modal-overlay{position:fixed;inset:0;background:rgba(6,43,85,.55);display:none;align-items:flex-start;justify-content:center;z-index:1000;padding:24px 16px;overflow-y:auto}
+    .modal-overlay{position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;background:rgba(6,43,85,.55);display:none;align-items:flex-start;justify-content:center;z-index:999999!important;padding:24px 16px;overflow-y:auto;box-sizing:border-box}
     .modal-overlay.show{display:flex}
     .modal-box{background:#fff;border-radius:14px;max-width:560px;width:100%;padding:26px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;margin:auto}
     .modal-box h3{font-size:19px;color:#062b55;margin:0 0 4px}
@@ -2626,15 +2626,29 @@
         });
       });
       /* ===== Modals: monthly cost + lead capture ===== */
-      function openModal(id){var m=el(id);if(m)m.classList.add("show");}
-      function closeModal(id){var m=el(id);if(m)m.classList.remove("show");}
+      /* Move modal to document.body on open so it escapes any WordPress overflow:hidden container */
+      function openModal(id){
+        var m=el(id);
+        if(!m)return;
+        if(m.parentNode!==document.body)document.body.appendChild(m);
+        m.style.display="flex";
+        requestAnimationFrame(function(){m.classList.add("show");});
+        document.body.style.overflow="hidden";
+      }
+      function closeModal(id){
+        var m=el(id);
+        if(!m)return;
+        m.classList.remove("show");
+        setTimeout(function(){if(!m.classList.contains("show"))m.style.display="none";},50);
+        document.body.style.overflow="";
+      }
       document.querySelectorAll("[data-close-modal]").forEach(function(btn){
         btn.addEventListener("click",function(){closeModal(btn.getAttribute("data-close-modal"));});
       });
       document.querySelectorAll(".modal-overlay").forEach(function(ov){
-        ov.addEventListener("click",function(e){if(e.target===ov)ov.classList.remove("show");});
+        ov.addEventListener("click",function(e){if(e.target===ov){ov.classList.remove("show");ov.style.display="none";document.body.style.overflow="";}});
       });
-      document.addEventListener("keydown",function(e){if(e.key==="Escape")document.querySelectorAll(".modal-overlay.show").forEach(function(m){m.classList.remove("show");});});
+      document.addEventListener("keydown",function(e){if(e.key==="Escape")document.querySelectorAll(".modal-overlay.show").forEach(function(m){m.classList.remove("show");m.style.display="none";document.body.style.overflow="";});});
 
       function currentSelected(){return selectedScenario(activeScenario);}
       function buildEstimateSummary(){
