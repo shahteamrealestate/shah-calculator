@@ -250,7 +250,7 @@
 
     .input-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
       align-items: end;
       margin-bottom: 10px;
@@ -522,6 +522,58 @@
       pointer-events: none;
     }
 
+
+    .down-payment-editor {
+      display: grid;
+      gap: 7px;
+    }
+
+    .money-control {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--ink);
+      padding: 0 12px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .money-control:focus-within {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(116, 199, 238, 0.24);
+    }
+
+    .money-control span {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 900;
+      margin-right: 5px;
+    }
+
+    .money-control input {
+      width: 100%;
+      min-width: 0;
+      min-height: auto;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 0;
+      text-align: right;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      outline: none;
+    }
+
+    .money-control input:focus {
+      border: 0;
+      box-shadow: none;
+    }
+
     .mini-input,
     .scenario-years {
       text-align: right;
@@ -654,10 +706,13 @@
       margin: 4px 0 4px;
       color: var(--navy);
       font-family: var(--site-font);
-      font-size: clamp(42px, 7vw, 58px);
+      font-size: clamp(34px, 5vw, 46px);
       font-weight: 900;
-      line-height: 0.95;
+      line-height: 1.05;
     }
+
+    .big-number .payment-main { display:block; }
+    .big-number .payment-sub { display:block;margin-top:4px;color:#1B4F8A;font-size:clamp(14px,2vw,17px);font-weight:800;line-height:1.25; }
 
     .summary-card p,
     .info-card p {
@@ -1089,16 +1144,16 @@
     }
 
     .principal-bar {
-      fill: #54bd78;
+      fill: #74c7ee;
     }
 
     .interest-bar {
-      fill: #067da5;
+      fill: #203a5f;
     }
 
     .balance-path {
       fill: none;
-      stroke: #f28a00;
+      stroke: #8b6f3d;
       stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -1165,15 +1220,15 @@
     }
 
     .legend .interest-dot {
-      background: #067da5;
+      background: #203a5f;
     }
 
     .legend .principal-dot {
-      background: #54bd78;
+      background: #74c7ee;
     }
 
     .legend .balance-dot {
-      background: #f28a00;
+      background: #8b6f3d;
     }
 
     .schedule-table-wrap {
@@ -1206,21 +1261,24 @@
       display: none;
     }
 
-    .schedule-table-toggle summary::after {
-      content: "Show table";
+    .schedule-table-toggle summary::after,
+    .schedule-table-toggle[open] summary::after {
+      content: none;
+      display: none;
+    }
+
+    .schedule-toggle-state {
       margin-left: 10px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       color: #fff;
       padding: 7px 16px;
       border: 0;
       border-radius: 6px;
       background: #1B4F8A;
       white-space: nowrap;
-    }
-
-    .schedule-table-toggle[open] summary::after {
-      content: "Hide table";
+      min-width: 82px;
+      text-align: center;
     }
 
     .schedule-table-toggle .schedule-table-wrap {
@@ -1488,6 +1546,48 @@
     .booking-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#062b55;border:2px solid #062b55;border-radius:9px;padding:12px 24px;font-size:14px;font-weight:800;text-decoration:none;transition:background .15s,color .15s}
     .booking-cta:hover{background:#062b55;color:#fff}
     .booking-note{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+    /* Frequency pointer + buyer decision cards */
+    .monthly-pointer{display:inline-flex;align-items:center;justify-content:center;width:46px;height:38px;margin-left:auto;border-radius:999px;background:var(--blue-soft);color:var(--navy);border:1px solid rgba(116,199,238,.85);font-size:28px;font-weight:900;line-height:1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+    .budget-reality-card{margin-top:18px;border:1px solid rgba(116,199,238,.55);border-radius:16px;background:#ffffff;padding:0;display:grid;grid-template-columns:minmax(260px,.72fr) minmax(360px,1.28fr);gap:0;overflow:hidden;box-shadow:0 18px 42px rgba(6,43,85,.12)}
+    .budget-card-copy{padding:18px 20px;color:#fff;display:grid;align-content:center;gap:8px;background:linear-gradient(135deg,#062b55,#1B4F8A)}
+    .budget-kicker{margin:0;color:#74c7ee!important;font-size:11px!important;font-weight:900!important;letter-spacing:.12em;text-transform:uppercase}
+    .budget-reality-card h3{margin:0;color:#fff;font-size:22px;font-weight:900;line-height:1.12}
+    .budget-reality-card p{margin:0;color:rgba(255,255,255,.84);font-size:13px;line-height:1.58}
+    .budget-card-copy strong{color:#fff}
+    .budget-card-panel{padding:18px 20px;display:grid;gap:10px;background:#fff}
+    .budget-snapshot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .budget-snapshot div{border:1px solid #d7e9f5;border-radius:12px;background:#fff;padding:12px 10px;min-width:0}
+    .budget-snapshot span{display:block;color:#657384;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .budget-snapshot strong{display:block;color:#062b55;font-size:15px;line-height:1.18;overflow-wrap:anywhere}
+    .budget-path{display:grid;gap:8px}
+    .budget-step{display:flex;gap:10px;align-items:flex-start;border:1px solid #e0e8f0;border-radius:12px;background:#fff;padding:11px 12px;text-align:left}
+    .budget-step i{display:inline-flex;align-items:center;justify-content:center;flex:0 0 26px;width:26px;height:26px;border-radius:999px;background:#eef8fe;color:#062b55;font-style:normal;font-size:13px;font-weight:900}
+    .budget-step strong{display:block;color:#062b55;font-size:13px;margin-bottom:2px}
+    .budget-step span{display:block;color:#5b6b7d;font-size:11.5px;line-height:1.35}
+    .budget-reality-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:2px}
+    .budget-link,.budget-call{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 15px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none}
+    .budget-link{background:#062b55;color:#fff}.budget-call{background:#74c7ee;color:#062b55}
+    .budget-note{font-size:11px!important;color:#8a96a3!important;line-height:1.5!important}
+    .print-skip{grid-column:1/-1;background:#fff;color:#1B4F8A;border:1px solid #74c7ee;border-radius:9px;padding:13px;font-size:14px;font-weight:800;cursor:pointer}
+    .print-estimate{display:none} /* shown only during print; print CSS removes all other page sections to avoid blank pages */
+    .print-brand{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#1B4F8A;margin-bottom:6px}
+    @media(max-width:640px){.monthly-pointer{width:54px;height:44px;font-size:32px}.budget-reality-card{grid-template-columns:1fr;background:#fff}.budget-card-copy{padding:18px}.budget-card-panel{padding:16px}.budget-snapshot{grid-template-columns:1fr}.budget-reality-actions{display:grid}.budget-link,.budget-call{width:100%}}
+    @media print{
+      @page{size:auto;margin:.45in}
+      html,body{background:#fff!important;color:#111!important;margin:0!important;padding:0!important;width:auto!important;min-height:0!important;overflow:visible!important}
+      body > *:not(#printEstimate){display:none!important}
+      #printEstimate{display:block!important;position:static!important;left:auto!important;top:auto!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif!important;box-shadow:none!important;border:0!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
+      #printEstimate *{visibility:visible!important;box-shadow:none!important}
+      #printEstimate h1{font-size:21px!important;line-height:1.18!important;margin:0 0 6px!important;color:#062b55!important;break-after:avoid!important;page-break-after:avoid!important}
+      #printEstimate h2{font-size:14px!important;margin:14px 0 6px!important;color:#062b55!important;break-after:avoid!important;page-break-after:avoid!important}
+      #printEstimate p{font-size:11px!important;line-height:1.38!important;color:#333!important;margin:5px 0!important}
+      #printEstimate table{width:100%!important;border-collapse:collapse!important;margin:6px 0 10px!important;font-size:10.5px!important;break-inside:avoid!important;page-break-inside:avoid!important}
+      #printEstimate tr{break-inside:avoid!important;page-break-inside:avoid!important}
+      #printEstimate th,#printEstimate td{border:1px solid #d8e2ec!important;padding:5px 6px!important;text-align:left!important;vertical-align:top!important}
+      #printEstimate th{background:#f1f6fb!important;color:#062b55!important;width:38%!important}
+      #printEstimate .print-disclaimer{font-size:9.5px!important;line-height:1.35!important;color:#555!important;border-top:1px solid #d8e2ec!important;padding-top:8px!important;margin-top:10px!important;break-inside:avoid!important;page-break-inside:avoid!important}
+    }
   </style>
 </head>
 <body>
@@ -1521,15 +1621,14 @@
         <div class="mode-head">
           <p class="eyebrow" id="mode-eyebrow">Mortgage payment calculator</p>
           <h2 id="mode-title">Estimate the payment before you start touring.</h2>
-          <p id="mode-description">Compare payment scenarios side by side. Principal, interest, CMHC premium and estimated carrying costs update as you change the assumptions.</p>
+          <p id="mode-description">Compare payment scenarios side by side. Principal, interest and CMHC premium update as you change the assumptions.</p>
           <p class="mode-scenario-line" id="modeScenarioLine" style="display:none"></p>
         </div>
 
         <div class="input-grid">
           <label class="field">First-time homebuyer <select id="firstTimeStatus"><option value="no" selected>No</option><option value="yes">Yes</option></select></label>
           <label class="field">Location <input id="city" type="text" value="Brampton"></label>
-          <label class="field">Purchase price <input id="purchasePrice" type="number" min="0" step="1000" value="950000"></label>
-          <label class="field">Property type <select id="propertyType"><option value="detached">Detached</option><option value="semi">Semi-detached</option><option value="townhouse">Townhouse</option><option value="condo" selected>Condo</option><option value="multi">Multi-residential</option></select></label>
+          <label class="field">Purchase price <input id="purchasePrice" type="text" inputmode="numeric" value="$950,000" aria-label="Purchase price in Canadian dollars"></label>
           <label class="field">Residency <select id="residency"><option value="citizen" selected>Citizen / PR</option><option value="foreign">Foreign / non-resident</option></select></label>
         </div>
 
@@ -1564,10 +1663,10 @@
               <tbody>
                 <tr>
                   <th class="row-head">Down payment</th>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="0" type="text" inputmode="decimal" value="7.5" aria-label="Scenario 1 down payment percent"></span><small id="pay-down-0"></small></div></td>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="1" type="text" inputmode="decimal" value="10" aria-label="Scenario 2 down payment percent"></span><small id="pay-down-1"></small></div></td>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="2" type="text" inputmode="decimal" value="15" aria-label="Scenario 3 down payment percent"></span><small id="pay-down-2"></small></div></td>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="3" type="text" inputmode="decimal" value="20" aria-label="Scenario 4 down payment percent"></span><small id="pay-down-3"></small></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="0" type="text" inputmode="decimal" value="7.5" aria-label="Scenario 1 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="0" type="text" inputmode="numeric" aria-label="Scenario 1 down payment amount"></span></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="1" type="text" inputmode="decimal" value="10" aria-label="Scenario 2 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="1" type="text" inputmode="numeric" aria-label="Scenario 2 down payment amount"></span></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="2" type="text" inputmode="decimal" value="15" aria-label="Scenario 3 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="2" type="text" inputmode="numeric" aria-label="Scenario 3 down payment amount"></span></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="3" type="text" inputmode="decimal" value="20" aria-label="Scenario 4 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="3" type="text" inputmode="numeric" aria-label="Scenario 4 down payment amount"></span></div></td>
                 </tr>
                 <tr><th class="row-head">CMHC insurance</th><td class="muted-value" id="pay-cmhc-0"></td><td class="muted-value" id="pay-cmhc-1"></td><td class="muted-value" id="pay-cmhc-2"></td><td class="muted-value" id="pay-cmhc-3"></td></tr>
                 <tr class="total-row"><th class="row-head">Total mortgage</th><td><button class="money-button active" type="button" data-scenario="0" id="pay-total-0"></button></td><td><button class="money-button" type="button" data-scenario="1" id="pay-total-1"></button></td><td><button class="money-button" type="button" data-scenario="2" id="pay-total-2"></button></td><td><button class="money-button" type="button" data-scenario="3" id="pay-total-3"></button></td></tr>
@@ -1600,6 +1699,9 @@
                   <td><select class="mini-select scenario-frequency" data-index="3"><option value="monthly">Monthly</option><option value="biweekly">Bi-weekly</option><option value="weekly">Weekly</option><option value="acceleratedBiweekly">Accelerated bi-weekly</option><option value="acceleratedWeekly">Accelerated weekly</option></select></td>
                 </tr>
                 <tr class="total-row"><th class="row-head">Mortgage payment</th><td><button class="money-button active" type="button" data-scenario="0" id="pay-payment-0"></button></td><td><button class="money-button" type="button" data-scenario="1" id="pay-payment-1"></button></td><td><button class="money-button" type="button" data-scenario="2" id="pay-payment-2"></button></td><td><button class="money-button" type="button" data-scenario="3" id="pay-payment-3"></button></td></tr>
+                <tr class="total-row" id="pay-monthly-row" hidden><th class="row-head">Total monthly payment</th><td class="muted-value" id="pay-monthly-0"></td><td class="muted-value" id="pay-monthly-1"></td><td class="muted-value" id="pay-monthly-2"></td><td class="muted-value" id="pay-monthly-3"></td></tr>
+                <tr class="total-row" id="pay-amort-row"><th class="row-head">Selected amortization</th><td class="muted-value" id="pay-amort-0"></td><td class="muted-value" id="pay-amort-1"></td><td class="muted-value" id="pay-amort-2"></td><td class="muted-value" id="pay-amort-3"></td></tr>
+                <tr class="total-row" id="pay-accelerated-row" hidden><th class="row-head">Accelerated payoff estimate</th><td class="muted-value" id="pay-accelerated-0"></td><td class="muted-value" id="pay-accelerated-1"></td><td class="muted-value" id="pay-accelerated-2"></td><td class="muted-value" id="pay-accelerated-3"></td></tr>
               </tbody>
             </table>
           </div>
@@ -1634,10 +1736,10 @@
               <tbody>
                 <tr>
                   <th class="row-head">Down payment</th>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="0" type="text" inputmode="decimal" value="7.5" aria-label="Scenario 1 down payment percent"></span><small id="ins-down-0"></small></div></td>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="1" type="text" inputmode="decimal" value="10" aria-label="Scenario 2 down payment percent"></span><small id="ins-down-1"></small></div></td>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="2" type="text" inputmode="decimal" value="15" aria-label="Scenario 3 down payment percent"></span><small id="ins-down-2"></small></div></td>
-                  <td><div class="two-line"><span class="percent-control"><input class="mini-input scenario-down" data-index="3" type="text" inputmode="decimal" value="20" aria-label="Scenario 4 down payment percent"></span><small id="ins-down-3"></small></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="0" type="text" inputmode="decimal" value="7.5" aria-label="Scenario 1 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="0" type="text" inputmode="numeric" aria-label="Scenario 1 down payment amount"></span></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="1" type="text" inputmode="decimal" value="10" aria-label="Scenario 2 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="1" type="text" inputmode="numeric" aria-label="Scenario 2 down payment amount"></span></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="2" type="text" inputmode="decimal" value="15" aria-label="Scenario 3 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="2" type="text" inputmode="numeric" aria-label="Scenario 3 down payment amount"></span></div></td>
+                  <td><div class="down-payment-editor"><span class="percent-control"><input class="mini-input scenario-down" data-index="3" type="text" inputmode="decimal" value="20" aria-label="Scenario 4 down payment percent"></span><span class="money-control"><span>$</span><input class="mini-input scenario-down-amount" data-index="3" type="text" inputmode="numeric" aria-label="Scenario 4 down payment amount"></span></div></td>
                 </tr>
                 <tr><th class="row-head">Minimum down</th><td id="ins-min-0"></td><td id="ins-min-1"></td><td id="ins-min-2"></td><td id="ins-min-3"></td></tr>
                 <tr><th class="row-head">Base mortgage</th><td id="ins-base-0"></td><td id="ins-base-1"></td><td id="ins-base-2"></td><td id="ins-base-3"></td></tr>
@@ -1722,12 +1824,37 @@
             <div class="line-list" id="summary-lines" style="margin-top: 14px;">
               <div class="line-item"><span>Mortgage amount</span><strong id="summary-mortgage"></strong></div>
               <div class="line-item"><span>Down payment</span><strong id="summary-down"></strong></div>
-              <div class="line-item"><span>Monthly payment</span><strong id="summary-monthly"></strong></div>
+              <div class="line-item"><span>Monthly equivalent</span><strong id="summary-monthly"></strong></div>
               <div class="line-item"><span>Interest over amortization</span><strong id="summary-interest"></strong></div>
             </div>
             <div class="rate-sens" id="rateSens"></div>
           </aside>
         </div>
+
+        <aside class="budget-reality-card" id="budgetRealityCard">
+          <div class="budget-card-copy">
+            <p class="budget-kicker">Next step after the payment</p>
+            <h3>Ready to choose where to look?</h3>
+            <p>You are testing <strong id="brcPrice"></strong> in <strong id="brcCity"></strong>. Use the market page to compare recent GTA prices before deciding which areas and home types are worth touring first.</p>
+          </div>
+          <div class="budget-card-panel">
+            <div class="budget-snapshot" aria-label="Selected budget snapshot">
+              <div><span>Test price</span><strong id="brcPriceTile"></strong></div>
+              <div><span>Payment</span><strong id="brcMonthly"></strong></div>
+              <div><span>Check next</span><strong>Where to tour first</strong></div>
+            </div>
+            <div class="budget-path" aria-label="How to use this budget">
+              <div class="budget-step"><i>1</i><div><strong>Compare city prices</strong><span>See recent prices by area and home type.</span></div></div>
+              <div class="budget-step"><i>2</i><div><strong>Pick 2–3 areas</strong><span>Focus your search where your numbers look realistic.</span></div></div>
+              <div class="budget-step"><i>3</i><div><strong>Verify before offers</strong><span>Ask Gaurang to confirm what is realistic today.</span></div></div>
+            </div>
+            <div class="budget-reality-actions">
+              <a class="budget-link" id="brcMarketLink" href="https://myshahteam.com/gta-housing-market-data/" target="_blank" rel="noopener">Compare GTA prices →</a>
+              <a class="budget-call" href="tel:6478922411">Call Gaurang</a>
+            </div>
+            <p class="budget-note">Market data uses the latest available monthly numbers and may not match today’s active listings. Use it to narrow your search, then verify current options before touring or making an offer.</p>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -1736,16 +1863,11 @@
         <span class="cta-prompt-arrow">👇</span>
         <span>Your mortgage payment is only part of the story. <strong>Tap below to see your true monthly home cost</strong> — including property tax, condo fees, utilities and more.</span>
       </div>
-      <div class="tool-cta-row">
-        <button type="button" class="tool-cta-btn" id="openMonthlyCost">🏠 Estimate my full monthly home cost</button>
-        <button type="button" class="tool-cta-btn secondary" id="openLeadForm">✓ Ask Gaurang to Review My Numbers</button>
-        <button type="button" class="tool-cta-btn email-cta" id="openEmailForm">📧 Email me this estimate</button>
+      <div class="tool-cta-row compact-actions">
+        <button type="button" class="tool-cta-btn" id="openMonthlyCost">Estimate full monthly home cost</button>
+        <button type="button" class="tool-cta-btn email-cta" id="openPrintEstimate">Print / Save estimate</button>
       </div>
-      <p class="cta-phone">Call or text Gaurang: <a href="tel:6478922411" style="color:#1B4F8A;font-weight:700">647-892-2411</a></p>
-      <div style="text-align:center;margin-top:12px">
-        <a href="https://myshahteam.com/contact-us/" target="_blank" rel="noopener" class="booking-cta">📅 Book a Buyer Planning Call</a>
-        <p class="booking-note">Free 20-minute call — no obligation. Gaurang reviews your numbers and answers your questions before you start touring.</p>
-      </div>
+      <p class="cta-phone soft-note">No information is required to use the calculators. You can call or text Gaurang when you want a second look: <a href="tel:6478922411" style="color:#1B4F8A;font-weight:700">647-892-2411</a></p>
     </section>
 
     <!-- Monthly cost modal -->
@@ -1755,7 +1877,7 @@
         <h3>Estimate your full monthly home cost</h3>
         <p class="modal-sub">Your mortgage payment is only part of the monthly picture. Add the other carrying costs below to see a fuller estimate. All fields are optional.</p>
         <div class="mc-grid">
-          <label class="mc-field">Mortgage payment (from calculator)<input type="text" id="mcMortgage" readonly></label>
+          <label class="mc-field">Mortgage payment (monthly equivalent)<input type="text" id="mcMortgage" readonly></label>
           <label class="mc-field">Property tax (monthly)<input type="number" id="mcPropertyTax" min="0" step="10" placeholder="Auto-estimated"></label>
           <label class="mc-field">Condo / maintenance fee<input type="number" id="mcCondo" min="0" step="10" placeholder="0"></label>
           <label class="mc-field">Heat<input type="number" id="mcHeat" min="0" step="5" placeholder="120"></label>
@@ -1765,9 +1887,7 @@
         </div>
         <div class="mc-result" id="mcResult"></div>
         <p class="mc-disclaimer">This estimate uses a sample rate and the figures you enter. It is for planning only and does not include all possible costs. Your actual costs and approval may differ. Ask Gaurang or your mortgage broker to review your specific situation.</p>
-        <div class="tool-cta-row" style="margin-top:16px">
-          <button type="button" class="tool-cta-btn secondary" id="mcToLead" style="flex-basis:100%">Ask Gaurang to review this estimate &rarr;</button>
-        </div>
+        <p class="mc-disclaimer" style="margin-top:14px">Want a second look? Call or text Gaurang at <a href="tel:6478922411">647-892-2411</a>.</p>
       </div>
     </div>
 
@@ -1778,11 +1898,11 @@
         <h3>Ask Gaurang to review this estimate</h3>
         <p class="modal-sub">Send your details and I'll review your numbers and reply with what your real options may look like. No obligation.</p>
         <div class="lead-success" id="leadSuccess">✓ Thank you. Your estimate request has been sent to Gaurang. You'll hear back shortly at the contact details you provided.</div>
-        <form class="lead-form" id="leadForm" action="https://formspree.io/f/xeebjyao" method="POST">
+        <form class="lead-form" id="leadForm" action="" method="POST" data-hubspot-pending="true">
           <div class="lead-error" id="leadError">Please fill in all required fields and consent to be contacted.</div>
           <label class="lead-field">First name *<input type="text" name="first_name" id="leadFirst" required></label>
           <label class="lead-field">Last name *<input type="text" name="last_name" id="leadLast" required></label>
-          <label class="lead-field">Mobile number *<input type="tel" name="mobile" id="leadMobile" required></label>
+          <label class="lead-field">Mobile number *<input type="tel" name="mobile" id="leadMobile" inputmode="tel" autocomplete="tel" placeholder="(111) 111-1111" required></label>
           <label class="lead-field">Email *<input type="email" name="email" id="leadEmail" required></label>
           <label class="lead-field">City / area<input type="text" name="city_area" id="leadCity"></label>
           <label class="lead-field">Buyer type
@@ -1811,7 +1931,7 @@
         <h3>Email me this estimate</h3>
         <p class="modal-sub">We'll send a copy of your estimate to your inbox. No phone call, no obligation.</p>
         <div class="lead-success" id="emailSuccess">✓ Done. Your estimate is on its way to your inbox.</div>
-        <form class="lead-form" id="emailForm" action="https://formspree.io/f/xeebjyao" method="POST">
+        <form class="lead-form" id="emailForm" action="" method="POST" data-hubspot-pending="true">
           <div class="lead-error" id="emailError">Please enter your name and a valid email.</div>
           <label class="lead-field full">First name *<input type="text" name="first_name" id="emailFirst" required></label>
           <label class="lead-field full">Email *<input type="email" name="email" id="emailEmail" required></label>
@@ -1822,6 +1942,50 @@
         </form>
       </div>
     </div>
+
+    <div class="modal-overlay" id="printEstimateModal">
+      <div class="modal-box">
+        <button type="button" class="modal-close" data-close-modal="printEstimateModal" aria-label="Close">&times;</button>
+        <h3>Save this estimate before you print?</h3>
+        <p class="modal-sub">Want a copy or a second look? We can send this estimate to you and Gaurang can review the numbers with you.</p>
+        <div class="lead-success" id="printSuccess">✓ Your estimate is ready. The print window will open next.</div>
+        <form class="lead-form" id="printForm" action="" method="POST" data-hubspot-pending="true">
+          <div class="lead-error" id="printError">Please enter your first name, email and consent before sending.</div>
+          <label class="lead-field">First name *<input type="text" name="first_name" id="printFirst" required></label>
+          <label class="lead-field">Email *<input type="email" name="email" id="printEmail" required></label>
+          <label class="lead-field">Mobile number <input type="tel" name="mobile" id="printMobile" inputmode="tel" autocomplete="tel" placeholder="(111) 111-1111"></label>
+          <label class="lead-field">Buying timeline
+            <select name="buying_timeline" id="printTimeline">
+              <option value="">Select...</option>
+              <option value="0-3 months">0–3 months</option>
+              <option value="3-6 months">3–6 months</option>
+              <option value="6-12 months">6–12 months</option>
+              <option value="just researching">Just researching</option>
+            </select>
+          </label>
+          <input type="hidden" name="estimate_summary" id="printEstimateSummary">
+          <input type="hidden" name="_subject" value="MST Calculator — print/save estimate request">
+          <label class="lead-consent"><input type="checkbox" id="printConsent" required> Yes, Gaurang can contact me about this estimate. *</label>
+          <label class="lead-consent"><input type="checkbox" id="printUpdates" name="opt_in_updates" value="yes"> Send me helpful buyer updates (optional).</label>
+          <button type="submit" class="lead-submit">Send / Ask Gaurang to review</button>
+          <button type="button" class="print-skip" id="printWithoutSharing">Print without sharing</button>
+        </form>
+      </div>
+    </div>
+
+    <section class="print-estimate" id="printEstimate" aria-hidden="true">
+      <div class="print-brand">Team Shah Real Estate</div>
+      <h1>Mortgage estimate summary</h1>
+      <p id="printPrepared"></p>
+      <h2>Selected scenario</h2>
+      <table>
+        <tbody id="printScenarioRows"></tbody>
+      </table>
+      <h2>Turn this budget into a home search</h2>
+      <p id="printBudgetText"></p>
+      <p><strong>Next step:</strong> Compare current GTA price ranges at myshahteam.com/gta-housing-market-data/ or call/text Gaurang at 647-892-2411 to verify this budget.</p>
+      <p class="print-disclaimer">This estimate is for planning only. It is not a mortgage approval, legal opinion, tax advice or guarantee of available inventory. Market data is based on the latest available monthly numbers and may not reflect today’s active listings. Confirm current options, mortgage approval, land transfer tax, closing costs and affordability with your real estate broker, mortgage specialist and lawyer.</p>
+    </section>
 
     <section class="details-stack" aria-label="Detailed calculator output">
       <details class="detail-card" id="calculation-card" open>
@@ -1841,9 +2005,9 @@
             <div class="legend"><span><i class="interest-dot"></i> Interest</span><span><i class="principal-dot"></i> Principal</span><span><i class="balance-dot"></i> Balance</span></div>
           </div>
           <details class="schedule-table-toggle">
-            <summary>Show year-by-year table</summary>
+            <summary><span>Year-by-year table</span><span class="schedule-toggle-state">Show</span></summary>
             <div class="schedule-table-wrap">
-              <table class="data-table"><thead><tr><th>Year</th><th>Total paid</th><th>Principal paid</th><th>Interest paid</th><th>Balance</th></tr></thead><tbody id="amort-table"></tbody></table>
+              <table class="data-table"><thead><tr><th>Year number</th><th>Calendar year</th><th>Principal paid to date</th><th>Interest paid to date</th><th>Total paid to date</th><th>Remaining balance</th></tr></thead><tbody id="amort-table"></tbody></table>
             </div>
           </details>
         </div>
@@ -1859,7 +2023,7 @@
           <details class="faq-item"><summary>Should I compare more than one down payment scenario?</summary><p>Yes. A different down payment can change the CMHC premium, total mortgage and monthly payment. That is why the payment tab shows four side-by-side scenarios.</p></details>
           <details class="faq-item"><summary>Should I calculate payment or closing costs first?</summary><p>Do both before touring. Payment tells you whether the home is comfortable monthly. Closing costs tell you whether you have enough cash to complete the purchase.</p></details>
           <details class="faq-item"><summary>Why does CMHC change the mortgage amount?</summary><p>When the down payment is under 20 percent, the insurance premium is often added to the mortgage. That means you may borrow more than the purchase price minus your down payment.</p></details>
-          <details class="faq-item"><summary>What does amortization mean here?</summary><p>Amortization is the full number of years used to pay the mortgage down to zero if the payment schedule and rate stayed as entered. A longer amortization usually lowers the payment but increases total interest.</p></details>
+          <details class="faq-item"><summary>What does amortization mean here?</summary><p>Amortization is the full number of years selected for the mortgage calculation. A larger down payment usually lowers the payment and interest cost. It does not shorten the selected amortization unless you keep paying extra or choose an accelerated payment option.</p></details>
           <details class="faq-item"><summary>What does payment frequency change?</summary><p>Frequency changes how often payments are made. Monthly, weekly and bi-weekly payments can have different per-payment amounts, and accelerated options can pay the loan down faster.</p></details>
           <details class="faq-item"><summary>Why does the interest rate matter so much?</summary><p>The rate changes both the payment and the speed at which principal is paid down. Even a small rate difference can add up when the mortgage is large or the amortization is long.</p></details>
           <details class="faq-item"><summary>Can this calculator tell me what I qualify for?</summary><p>No. It helps you test comfort and compare scenarios. A lender or mortgage broker still has to review income, debts, credit, documents and mortgage rules before confirming approval.</p></details>
@@ -1878,7 +2042,7 @@
           <details class="faq-item"><summary>Why do some Toronto purchases show two taxes?</summary><p>Toronto properties can have Ontario land transfer tax and Toronto municipal land transfer tax. The municipal tax is separate, so the closing number can be much higher than a similar property outside Toronto.</p></details>
           <details class="faq-item"><summary>What happens when I type Scarborough, North York or Etobicoke?</summary><p>The calculator treats those locations as part of the City of Toronto for this estimate. It will include Ontario LTT and Toronto MLTT and show a note under the location row.</p></details>
           <details class="faq-item"><summary>Why does the rebate appear in my calculation?</summary><p>The rebate appears only when First-time homebuyer is set to Yes and the residency selection supports the estimate. The note is there so the buyer knows the lower tax depends on that assumption.</p></details>
-          <details class="faq-item"><summary>Do non-resident taxes apply to every buyer?</summary><p>No. Non-resident speculation tax (NRST) only applies to foreign buyers and depends on status, property type, location and current rules. It is shown separately and only when it applies — a lawyer or tax professional should confirm your exact situation.</p></details>
+          <details class="faq-item"><summary>Do non-resident taxes apply to every buyer?</summary><p>No. Non-resident speculation tax (NRST) only applies to foreign buyers and depends on buyer status, location and current rules. It is shown separately and only when it applies — a lawyer or tax professional should confirm your exact situation.</p></details>
           <details class="faq-item"><summary>Can the lawyer's final number differ from this estimate?</summary><p>Yes. Your lawyer may include closing adjustments, title insurance, registration costs, rebates, exemptions or rule details that are outside this quick calculator. Use this for planning, not as the final statement of adjustments. <a href="https://myshahteam.com/first-time-home-buyer-closing-costs-ontario/" target="_blank" rel="noopener">Read: closing costs in Ontario &rarr;</a></p></details>
         </section>
 
@@ -1995,10 +2159,10 @@
       var SAMPLE_RATE = 4.00;
       var rateMode = "sample";
       var scenarios = [
-        { down: 7.5, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" },
-        { down: 10, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" },
-        { down: 15, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" },
-        { down: 20, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" }
+        { down: 7.5, downMode: "percent", downAmount: null, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" },
+        { down: 10, downMode: "percent", downAmount: null, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" },
+        { down: 15, downMode: "percent", downAmount: null, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" },
+        { down: 20, downMode: "percent", downAmount: null, rate: SAMPLE_RATE, rateType: "fixed", years: 25, frequency: "monthly" }
       ];
 
       var modeText = {
@@ -2023,7 +2187,12 @@
       function el(id) { return document.getElementById(id); }
       function money(value) { return moneyFormatter.format(Number.isFinite(Number(value)) ? Number(value) : 0); }
       function pct(value) { return numberFormatter.format(Number.isFinite(Number(value)) ? Number(value) : 0) + "%"; }
-      function number(id, fallback) { var value = Number(el(id).value); return Number.isFinite(value) ? value : fallback; }
+      function number(id, fallback) {
+        var node = el(id);
+        if (!node) return fallback;
+        var value = parseMoneyEntry(node.value, fallback);
+        return Number.isFinite(value) ? value : fallback;
+      }
       function round(value) { return Math.round((Number(value) + Number.EPSILON) * 100) / 100; }
       function cleanPercentEntry(value) {
         var cleaned = String(value || "").replace(/,/g, "").replace(/%/g, "").replace(/[^\d.]/g, "");
@@ -2036,6 +2205,36 @@
         var parsed = Number(cleaned);
         return Number.isFinite(parsed) ? Math.max(0, parsed) : fallback;
       }
+      function cleanMoneyEntry(value) {
+        return String(value || "").replace(/,/g, "").replace(/\$/g, "").replace(/[^\d.]/g, "");
+      }
+      function parseMoneyEntry(value, fallback) {
+        var cleaned = cleanMoneyEntry(value);
+        if (cleaned === "" || cleaned === ".") return fallback;
+        var parsed = Number(cleaned);
+        return Number.isFinite(parsed) ? Math.max(0, parsed) : fallback;
+      }
+      function formatMoneyInput(value) {
+        return new Intl.NumberFormat("en-CA", { maximumFractionDigits: 0 }).format(Math.max(0, Math.round(Number(value) || 0)));
+      }
+      function formatCurrencyInput(value) {
+        return "$" + formatMoneyInput(value);
+      }
+      function phoneDigits(value) {
+        var digits = String(value || "").replace(/\D/g, "");
+        if (digits.length === 11 && digits.charAt(0) === "1") digits = digits.slice(1);
+        return digits.slice(0, 10);
+      }
+      function formatPhoneValue(value) {
+        var d = phoneDigits(value);
+        if (d.length <= 3) return d;
+        if (d.length <= 6) return "(" + d.slice(0, 3) + ") " + d.slice(3);
+        return "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+      }
+      function validPhone(value, required) {
+        var d = phoneDigits(value);
+        return (!required && d.length === 0) || d.length === 10;
+      }
       function formatDownInput(value) {
         return numberFormatter.format(round(Number(value) || 0));
       }
@@ -2044,7 +2243,7 @@
       function cityIsTorontoArea() { return torontoAreas.indexOf(cleanCity()) >= 0 || torontoAreas.indexOf(cityRateKey()) >= 0; }
       function isToronto() { return cityIsTorontoArea(); }
       function isFirstTimeBuyer() { return el("firstTimeStatus").value === "yes"; }
-      function isSingleFamily() { return el("propertyType").value !== "multi"; }
+      function isSingleFamily() { return true; }
 
       function marginalTax(amount, brackets) {
         var taxable = Math.max(0, Number(amount) || 0), previous = 0, tax = 0;
@@ -2139,11 +2338,11 @@
 
       function frequencyInfo(frequency) {
         var options = {
-          monthly: { label: "Monthly", paymentsPerYear: 12 },
-          biweekly: { label: "Bi-weekly", paymentsPerYear: 26 },
-          weekly: { label: "Weekly", paymentsPerYear: 52 },
-          acceleratedBiweekly: { label: "Accelerated bi-weekly", paymentsPerYear: 26, acceleratedFromMonthly: 2 },
-          acceleratedWeekly: { label: "Accelerated weekly", paymentsPerYear: 52, acceleratedFromMonthly: 4 }
+          monthly: { label: "Monthly", suffix: "month", paymentsPerYear: 12 },
+          biweekly: { label: "Bi-weekly", suffix: "bi-weekly", paymentsPerYear: 26 },
+          weekly: { label: "Weekly", suffix: "week", paymentsPerYear: 52 },
+          acceleratedBiweekly: { label: "Accelerated bi-weekly", suffix: "accelerated bi-weekly", paymentsPerYear: 26, acceleratedFromMonthly: 2 },
+          acceleratedWeekly: { label: "Accelerated weekly", suffix: "accelerated weekly", paymentsPerYear: 52, acceleratedFromMonthly: 4 }
         };
         return options[frequency] || options.monthly;
       }
@@ -2161,16 +2360,56 @@
         var selected = frequencyInfo(frequency);
         var monthly = paymentForFrequency(principal, ratePercent, years, 12);
         var perPayment = selected.acceleratedFromMonthly ? monthly / selected.acceleratedFromMonthly : paymentForFrequency(principal, ratePercent, years, selected.paymentsPerYear);
-        return { label: selected.label, perPayment: round(perPayment), monthlyEquivalent: round(perPayment * selected.paymentsPerYear / 12), paymentsPerYear: selected.paymentsPerYear };
+        var monthlyEquivalent = perPayment * selected.paymentsPerYear / 12;
+        return {
+          label: selected.label,
+          suffix: selected.suffix,
+          perPayment: round(perPayment),
+          exactPerPayment: perPayment,
+          monthlyEquivalent: round(monthlyEquivalent),
+          exactMonthlyEquivalent: monthlyEquivalent,
+          paymentsPerYear: selected.paymentsPerYear
+        };
+      }
+
+      function paymentDisplay(payment) {
+        return money(payment.perPayment) + " / " + (payment.suffix || "month");
+      }
+
+      function monthlyDisplay(payment) {
+        return money(payment.monthlyEquivalent) + " / month";
+      }
+      function paymentDisplayHtml(payment) {
+        var suffix = payment && payment.suffix ? payment.suffix : "month";
+        return '<span class="payment-main">' + escapeHtml(money(payment.perPayment)) + '</span><span class="payment-sub">per ' + escapeHtml(suffix) + ' payment</span>';
+      }
+
+      function isAcceleratedFrequency(frequency) {
+        return frequency === "acceleratedBiweekly" || frequency === "acceleratedWeekly";
+      }
+
+      function formatAmortization(years) {
+        var y = Number(years) || 25;
+        return y + (y === 1 ? " year" : " years");
       }
 
       function propertyTaxAnnual(price) { return round(price * (propertyTaxRates[cityRateKey()] || propertyTaxRates.default)); }
       function closingCosts(price) { return round(Math.max(1800 + 650 + 500 + 650 + 450 + price * 0.0025 + (isToronto() ? 102.56 * 1.13 : 0), 3200)); }
+      function downPaymentAmountForScenario(scenario, price) {
+        if (scenario.downMode === "amount") return round(Math.min(Math.max(0, Number(scenario.downAmount) || 0), Math.max(0, Number(price) || 0)));
+        return round(Math.max(0, Number(price) || 0) * (Number(scenario.down) || 0) / 100);
+      }
+      function updateScenarioDownFromAmount(scenario, price) {
+        var amount = downPaymentAmountForScenario(scenario, price);
+        scenario.downAmount = amount;
+        scenario.down = price > 0 ? round(amount / price * 100) : (Number(scenario.down) || 0);
+      }
 
       function selectedScenario(index) {
         var price = number("purchasePrice", 0);
         var data = scenarios[index];
-        var downPayment = round(price * data.down / 100);
+        updateScenarioDownFromAmount(data, price);
+        var downPayment = downPaymentAmountForScenario(data, price);
         var taxes = landTransferTaxes(price);
         var cmhc = cmhcDetails(price, downPayment);
         var payment = mortgagePayment(cmhc.totalMortgage, data.rate, data.years, data.frequency);
@@ -2178,21 +2417,80 @@
         return { price: price, downPayment: downPayment, taxes: taxes, cmhc: cmhc, payment: payment, ltt: ltt, closingCosts: closingCosts(price), cashToClose: round(downPayment + ltt + closingCosts(price)), data: data };
       }
 
+      function payoffPeriods(principal, ratePercent, paymentAmount, paymentsPerYear) {
+        var balance = Math.max(0, Number(principal) || 0);
+        var pay = Math.max(0, Number(paymentAmount) || 0);
+        var rate = periodicRate(ratePercent, paymentsPerYear);
+        var periods = 0;
+        var maxPeriods = Math.max(paymentsPerYear, 60 * paymentsPerYear);
+        if (balance <= 0) return 0;
+        while (balance > 0.01 && periods < maxPeriods) {
+          var interest = balance * rate;
+          var principalPaid = pay - interest;
+          if (principalPaid <= 0) return null;
+          balance = Math.max(0, balance - principalPaid);
+          periods += 1;
+        }
+        return balance > 0.01 ? null : periods;
+      }
+
+      function payoffTime(selected) {
+        if (!selected || !selected.data || !selected.payment) return null;
+        if (selected.data.frequency === "monthly" || selected.data.frequency === "biweekly" || selected.data.frequency === "weekly") {
+          return Number(selected.data.years) || null;
+        }
+        var paymentAmount = selected.payment.exactPerPayment || selected.payment.perPayment;
+        var periods = payoffPeriods(selected.cmhc.totalMortgage, selected.data.rate, paymentAmount, selected.payment.paymentsPerYear);
+        return periods === null ? null : periods / selected.payment.paymentsPerYear;
+      }
+
+      function formatPayoffTime(years) {
+        if (!Number.isFinite(Number(years))) return "—";
+        var totalMonths = Math.max(0, Math.round(Number(years) * 12));
+        var y = Math.floor(totalMonths / 12), m = totalMonths % 12;
+        if (y === 0) return m + (m === 1 ? " month" : " months");
+        if (m === 0) return y + (y === 1 ? " year" : " years");
+        return y + (y === 1 ? " year " : " years ") + m + (m === 1 ? " month" : " months");
+      }
+
       function amortizationRows(selected) {
-        var rows = [], balance = selected.cmhc.totalMortgage, rate = periodicRate(selected.data.rate, 12), monthly = mortgagePayment(selected.cmhc.totalMortgage, selected.data.rate, selected.data.years, "monthly").perPayment;
-        for (var year = 0; year < selected.data.years && balance > 0.01; year += 1) {
+        var rows = [], balance = selected.cmhc.totalMortgage, rate = periodicRate(selected.data.rate, selected.payment.paymentsPerYear), perPayment = selected.payment.exactPerPayment || selected.payment.perPayment;
+        for (var year = 0; year < 60 && balance > 0.01; year += 1) {
           var interestPaid = 0, principalPaid = 0, totalPaid = 0;
-          for (var month = 0; month < 12 && balance > 0.01; month += 1) {
+          for (var p = 0; p < selected.payment.paymentsPerYear && balance > 0.01; p += 1) {
             var interest = balance * rate;
-            var principal = Math.min(balance, Math.max(0, monthly - interest));
+            var principal = Math.min(balance, Math.max(0, perPayment - interest));
+            if (principal <= 0 && balance > 0) break;
             interestPaid += interest; principalPaid += principal; totalPaid += interest + principal; balance -= principal;
           }
-          rows.push({ year: 2026 + year, totalPaid: round(totalPaid), principalPaid: round(principalPaid), interestPaid: round(interestPaid), balance: round(Math.max(0, balance)) });
+          rows.push({ year: 2026 + year, yearNumber: year + 1, totalPaid: round(totalPaid), principalPaid: round(principalPaid), interestPaid: round(interestPaid), balance: round(Math.max(0, balance)) });
+          if (principalPaid <= 0 && balance > 0) break;
         }
         return rows;
       }
 
+      function amortizationRunningRows(rows) {
+        var principalToDate = 0, interestToDate = 0, totalToDate = 0;
+        return rows.map(function (row) {
+          principalToDate += Number(row.principalPaid) || 0;
+          interestToDate += Number(row.interestPaid) || 0;
+          totalToDate += Number(row.totalPaid) || 0;
+          return {
+            year: row.year,
+            yearNumber: row.yearNumber || 1,
+            principalToDate: round(principalToDate),
+            interestToDate: round(interestToDate),
+            totalToDate: round(totalToDate),
+            balance: row.balance
+          };
+        }).filter(function (row, index, all) {
+          return row.yearNumber === 1 || row.yearNumber % 5 === 0 || index === all.length - 1;
+        });
+      }
+
       function setText(id, text) { var node = el(id); if (node) node.textContent = text; }
+      function setHtml(id, html) { var node = el(id); if (node) node.innerHTML = html; }
+      function monthlyPointerHtml() { return '<span class="monthly-pointer" aria-label="Monthly payment shown below" title="Monthly payment shown below">↓</span>'; }
       function panelGrid(stats, lines) {
         var statHtml = stats.map(function (row) { return '<div class="stat-tile"><span>' + row[0] + '</span><strong>' + row[1] + '</strong></div>'; }).join("");
         var lineHtml = lines.map(function (row, index) { return '<div class="line-item' + (index === lines.length - 1 ? ' final' : '') + '"><span>' + row[0] + '</span><strong>' + row[1] + '</strong></div>'; }).join("");
@@ -2237,12 +2535,21 @@
       }
 
       function renderTables(all) {
+        var showMonthlyRow = all.some(function (item) { return item.data.frequency !== "monthly"; });
+        var showAcceleratedRow = all.some(function (item) { return isAcceleratedFrequency(item.data.frequency); });
+        var monthlyRow = el("pay-monthly-row");
+        var acceleratedRow = el("pay-accelerated-row");
+        if (monthlyRow) monthlyRow.hidden = !showMonthlyRow;
+        if (acceleratedRow) acceleratedRow.hidden = !showAcceleratedRow;
         all.forEach(function (item, index) {
-          setText("pay-down-" + index, money(item.downPayment));
+          var isMonthlyFrequency = item.data.frequency === "monthly";
+          var isAccelerated = isAcceleratedFrequency(item.data.frequency);
           setText("pay-cmhc-" + index, money(item.cmhc.premium));
           setText("pay-total-" + index, money(item.cmhc.totalMortgage));
-          setText("pay-payment-" + index, money(item.payment.monthlyEquivalent));
-          setText("ins-down-" + index, money(item.downPayment));
+          setHtml("pay-payment-" + index, showMonthlyRow && isMonthlyFrequency ? monthlyPointerHtml() : escapeHtml(paymentDisplay(item.payment)));
+          setText("pay-monthly-" + index, monthlyDisplay(item.payment));
+          setText("pay-amort-" + index, formatAmortization(item.data.years));
+          setText("pay-accelerated-" + index, isAccelerated ? formatPayoffTime(payoffTime(item)) : "—");
           setText("ins-min-" + index, money(item.cmhc.minDown));
           setText("ins-base-" + index, money(item.cmhc.baseMortgage));
           setText("ins-rate-" + index, item.cmhc.belowMin ? "—" : pct(item.cmhc.rate * 100));
@@ -2333,16 +2640,56 @@
         setText("ltt-note", note);
       }
 
+      function renderBudgetReality(selected) {
+        var card = el("budgetRealityCard");
+        if (!card) return;
+        card.style.display = activeTab === "payment" ? "grid" : "none";
+        setText("brcPrice", money(selected.price));
+        setText("brcPriceTile", money(selected.price));
+        setText("brcCity", el("city").value || "the selected city");
+        setText("brcMonthly", monthlyDisplay(selected.payment));
+      }
+
+      function updatePrintEstimate(selected) {
+        if (!el("printEstimate")) return;
+        var city = el("city").value || "n/a";
+        var firstTime = el("firstTimeStatus").value === "yes" ? "Yes" : "No";
+        var acceleratedPayoff = isAcceleratedFrequency(selected.data.frequency) ? formatPayoffTime(payoffTime(selected)) : "";
+        setText("printPrepared", "Prepared for planning on " + new Date().toLocaleDateString("en-CA") + ". Call or text Gaurang Shah: 647-892-2411.");
+        var rows = [
+          ["Purchase price", money(selected.price)],
+          ["Location", city],
+          ["First-time homebuyer", firstTime],
+          ["Down payment", formatDownInput(selected.data.down) + "% (" + money(selected.downPayment) + ")"],
+          ["Mortgage amount", money(selected.cmhc.totalMortgage)],
+          ["Rate", formatDownInput(selected.data.rate) + "% " + selected.data.rateType],
+          ["Selected amortization", formatAmortization(selected.data.years)],
+          ["Payment frequency", selected.payment.label],
+          ["Mortgage payment", paymentDisplay(selected.payment)],
+          ["Total monthly payment", monthlyDisplay(selected.payment)],
+          ["Accelerated payoff estimate", acceleratedPayoff || "Only shown for accelerated payments"],
+          ["Land transfer tax", money(selected.ltt)],
+          ["CMHC premium", money(selected.cmhc.premium)],
+          ["Cash needed to close", money(selected.cashToClose)]
+        ];
+        el("printScenarioRows").innerHTML = rows.map(function(row){ return "<tr><th>" + escapeHtml(row[0]) + "</th><td>" + escapeHtml(row[1]) + "</td></tr>"; }).join("");
+        setText("printBudgetText", "This scenario tests a " + money(selected.price) + " purchase price in " + city + ". Use the GTA market data page to compare recent prices by city and home type, then confirm which areas are worth touring with your real estate broker and mortgage specialist.");
+      }
+
       function renderSummary(selected) {
         var interestTotal = amortizationRows(selected).reduce(function (sum, row) { return sum + row.interestPaid; }, 0);
         var rebateTotal = selected.taxes.ontarioRebate + selected.taxes.torontoRebate;
-        setText("big-number", activeTab === "tax" ? money(selected.ltt) : activeTab === "insurance" ? money(selected.cmhc.premium) : money(selected.payment.monthlyEquivalent));
+        if (activeTab === "tax") setText("big-number", money(selected.ltt));
+        else if (activeTab === "insurance") setText("big-number", money(selected.cmhc.premium));
+        else setHtml("big-number", paymentDisplayHtml(selected.payment));
         setText("summary-label", activeTab === "tax" ? "Estimated land transfer tax" : activeTab === "insurance" ? "Estimated CMHC premium" : "Estimated payment");
         setText("summary-note", activeTab === "tax" ? "Ontario and Toronto municipal tax after rebates." : activeTab === "insurance" ? selected.cmhc.status : "Estimated principal and interest only.");
         setText("summary-mortgage", money(selected.cmhc.totalMortgage));
         setText("summary-down", pct(selected.data.down));
-        setText("summary-monthly", money(selected.payment.monthlyEquivalent));
+        setText("summary-monthly", monthlyDisplay(selected.payment));
         setText("summary-interest", money(interestTotal));
+        renderBudgetReality(selected);
+        updatePrintEstimate(selected);
         renderRateSensitivity(selected);
         setText("side-provincial", money(selected.taxes.ontarioNet));
         setText("side-municipal", money(selected.taxes.torontoNet));
@@ -2395,7 +2742,7 @@
             ["Base mortgage before premium", money(selected.cmhc.baseMortgage)],
             ["Loan-to-value", pct(selected.cmhc.ltv * 100)],
             ["Premium formula", money(selected.cmhc.baseMortgage) + " x " + pct(selected.cmhc.rate * 100) + " = " + money(selected.cmhc.premium)],
-            ["Payment before and after CMHC", money(withoutPremium.monthlyEquivalent) + " -> " + money(selected.payment.monthlyEquivalent)]
+            ["Payment before and after CMHC", paymentDisplay(withoutPremium) + " -> " + paymentDisplay(selected.payment)]
           ]) +
             '<p class="fine-note"><strong>Important:</strong> CMHC is not the only mortgage default insurance provider. Other providers include Sagen, formerly Genworth Canada, and Canada Guaranty. In Ontario, provincial sales tax may apply to the insurance premium and is usually a cash closing cost instead of being added to the mortgage.</p>' +
             '</div>';
@@ -2479,13 +2826,17 @@
           hoverTargets +
           yearLabels +
           '</svg>';
-        el("amort-table").innerHTML = rows.map(function (row) { return "<tr><td>" + row.year + "</td><td>" + money(row.totalPaid) + "</td><td>" + money(row.principalPaid) + "</td><td>" + money(row.interestPaid) + "</td><td>" + money(row.balance) + "</td></tr>"; }).join("");
+        var runningRows = amortizationRunningRows(rows);
+        el("amort-table").innerHTML = runningRows.map(function (row) {
+          return "<tr><td>Year " + row.yearNumber + "</td><td>" + row.year + "</td><td>" + money(row.principalToDate) + "</td><td>" + money(row.interestToDate) + "</td><td>" + money(row.totalToDate) + "</td><td>" + money(row.balance) + "</td></tr>";
+        }).join("");
       }
 
       function renderVisibility() {
         el("calculation-card").hidden = (activeTab === "payment" || activeTab === "closing");
         el("schedule-card").hidden = activeTab !== "payment";
         el("payment-summary").hidden = activeTab !== "payment";
+        var brc = el("budgetRealityCard"); if (brc) brc.style.display = activeTab === "payment" ? "grid" : "none";
         el("tax-strip").hidden = true;
         var rb = el("rateBanner"); if (rb) rb.style.display = activeTab === "payment" ? "" : "none";
         var mc = el("openMonthlyCost"); if (mc) mc.style.display = activeTab === "payment" ? "" : "none";
@@ -2532,12 +2883,24 @@
         banner.classList.remove("show");
       }
 
+      function refreshScheduleToggleLabels() {
+        document.querySelectorAll(".schedule-table-toggle").forEach(function (details) {
+          var state = details.querySelector(".schedule-toggle-state");
+          if (state) state.textContent = details.open ? "Hide table" : "Show";
+        });
+      }
+
       function render() {
         updateLockInputs();
         syncLockedRows(0);
         updateLockInputs();
+        var currentPrice = number("purchasePrice", 0);
+        var priceInput = el("purchasePrice");
+        if (priceInput && document.activeElement !== priceInput) priceInput.value = formatCurrencyInput(currentPrice);
         scenarios.forEach(function (scenario, index) {
+          updateScenarioDownFromAmount(scenario, currentPrice);
           document.querySelectorAll('.scenario-down[data-index="' + index + '"]').forEach(function (input) { if (document.activeElement !== input) input.value = formatDownInput(scenario.down); });
+          document.querySelectorAll('.scenario-down-amount[data-index="' + index + '"]').forEach(function (input) { if (document.activeElement !== input) input.value = formatMoneyInput(scenario.downAmount); });
           document.querySelectorAll('.scenario-rate[data-index="' + index + '"]').forEach(function (input) { if (document.activeElement !== input) input.value = formatDownInput(scenario.rate); });
           document.querySelectorAll('.scenario-rate-type[data-index="' + index + '"]').forEach(function (input) { input.value = scenario.rateType; });
           document.querySelectorAll('.scenario-years[data-index="' + index + '"]').forEach(function (input) { input.value = scenario.years; });
@@ -2557,8 +2920,11 @@
         renderClosingTab(selected);
         renderCalculationCard(selected);
         renderAmortization(selected);
+        refreshScheduleToggleLabels();
       }
 
+      document.querySelectorAll(".schedule-table-toggle").forEach(function (details) { details.addEventListener("toggle", refreshScheduleToggleLabels); });
+      refreshScheduleToggleLabels();
       document.querySelectorAll(".tab").forEach(function (button) { button.addEventListener("click", function () { activeTab = button.dataset.tab; render(); }); });
       document.addEventListener("click", function (e) {
         var goto = e.target && e.target.closest ? e.target.closest("[data-goto-tab]") : null;
@@ -2570,12 +2936,32 @@
           var index = Number(input.dataset.index);
           var cleaned = cleanPercentEntry(input.value);
           if (input.value !== cleaned) input.value = cleaned;
+          scenarios[index].downMode = "percent";
           scenarios[index].down = parsePercentEntry(cleaned, scenarios[index].down);
+          scenarios[index].downAmount = round(number("purchasePrice", 0) * scenarios[index].down / 100);
           render();
         });
         input.addEventListener("blur", function () {
           var index = Number(input.dataset.index);
           input.value = formatDownInput(scenarios[index].down);
+          render();
+        });
+      });
+      document.querySelectorAll(".scenario-down-amount").forEach(function (input) {
+        input.addEventListener("input", function () {
+          var index = Number(input.dataset.index);
+          var cleaned = cleanMoneyEntry(input.value);
+          if (input.value !== cleaned) input.value = cleaned;
+          scenarios[index].downMode = "amount";
+          scenarios[index].downAmount = parseMoneyEntry(cleaned, scenarios[index].downAmount || 0);
+          var price = number("purchasePrice", 0);
+          scenarios[index].downAmount = Math.min(scenarios[index].downAmount, Math.max(0, price));
+          scenarios[index].down = price > 0 ? round(scenarios[index].downAmount / price * 100) : scenarios[index].down;
+          render();
+        });
+        input.addEventListener("blur", function () {
+          var index = Number(input.dataset.index);
+          input.value = formatMoneyInput(scenarios[index].downAmount);
           render();
         });
       });
@@ -2599,7 +2985,15 @@
       document.querySelectorAll(".scenario-frequency").forEach(function (input) { input.addEventListener("change", function () { var index = Number(input.dataset.index); scenarios[index].frequency = input.value; syncLockedRows(index); render(); }); });
       el("amortScenario").addEventListener("change", function () { activeScenario = Number(el("amortScenario").value) || 0; render(); });
       ["sameYears", "sameRate", "sameRateType", "sameFrequency"].forEach(function (id) { el(id).addEventListener("change", render); });
-      ["firstTimeStatus", "purchasePrice", "city", "propertyType", "residency"].forEach(function (id) { el(id).addEventListener(id === "city" || id === "purchasePrice" ? "input" : "change", render); });
+      ["firstTimeStatus", "purchasePrice", "city", "residency"].forEach(function (id) { el(id).addEventListener(id === "city" || id === "purchasePrice" ? "input" : "change", render); });
+      var purchasePriceInput = el("purchasePrice");
+      if (purchasePriceInput) purchasePriceInput.addEventListener("blur", function(){ purchasePriceInput.value = formatCurrencyInput(number("purchasePrice", 0)); render(); });
+      ["leadMobile", "printMobile"].forEach(function(id){
+        var phone = el(id);
+        if (!phone) return;
+        phone.addEventListener("input", function(){ phone.value = formatPhoneValue(phone.value); });
+        phone.addEventListener("blur", function(){ phone.value = formatPhoneValue(phone.value); });
+      });
       function applyRateMode() {
         var sampleInputs = document.querySelectorAll(".scenario-rate");
         if (rateMode === "sample") {
@@ -2653,13 +3047,37 @@
       function currentSelected(){return selectedScenario(activeScenario);}
       function buildEstimateSummary(){
         var sel=currentSelected();
-        return "Price: "+money(sel.price)+" | Down: "+formatDownInput(sel.data.down)+"% ("+money(sel.downPayment)+") | Rate: "+formatDownInput(sel.data.rate)+"% "+sel.data.rateType+" | Amortization: "+sel.data.years+" yrs | Mortgage payment: "+money(sel.payment.monthlyEquivalent)+"/mo | LTT: "+money(sel.ltt)+" | Cash to close: "+money(sel.cashToClose)+" | Location: "+(el("city").value||"n/a")+" | First-time: "+el("firstTimeStatus").value;
+        return "Price: "+money(sel.price)+" | Down: "+formatDownInput(sel.data.down)+"% ("+money(sel.downPayment)+") | Rate: "+formatDownInput(sel.data.rate)+"% "+sel.data.rateType+" | Selected amortization: "+formatAmortization(sel.data.years)+" | Payment frequency: "+sel.payment.label+" | Mortgage payment: "+paymentDisplay(sel.payment)+" | Monthly equivalent: "+monthlyDisplay(sel.payment)+(isAcceleratedFrequency(sel.data.frequency)?" | Accelerated payoff estimate: "+formatPayoffTime(payoffTime(sel)):"")+" | LTT: "+money(sel.ltt)+" | Cash to close: "+money(sel.cashToClose)+" | Location: "+(el("city").value||"n/a")+" | First-time: "+el("firstTimeStatus").value;
+      }
+
+      function printCleanEstimate() {
+        updatePrintEstimate(currentSelected());
+        var node = el("printEstimate");
+        if (!node) { window.print(); return; }
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("aria-hidden", "true");
+        iframe.style.position = "fixed";
+        iframe.style.right = "0";
+        iframe.style.bottom = "0";
+        iframe.style.width = "0";
+        iframe.style.height = "0";
+        iframe.style.border = "0";
+        document.body.appendChild(iframe);
+        var doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Team Shah Estimate</title><style>@page{margin:.45in}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:0;background:#fff}.print-brand{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#1B4F8A;margin-bottom:6px}h1{font-size:21px;line-height:1.18;margin:0 0 6px;color:#062b55}h2{font-size:14px;margin:14px 0 6px;color:#062b55}p{font-size:11px;line-height:1.38;color:#333;margin:5px 0}table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:10.5px;break-inside:avoid;page-break-inside:avoid}tr{break-inside:avoid;page-break-inside:avoid}th,td{border:1px solid #d8e2ec;padding:5px 6px;text-align:left;vertical-align:top}th{background:#f1f6fb;color:#062b55;width:38%}.print-disclaimer{font-size:9.5px;line-height:1.35;color:#555;border-top:1px solid #d8e2ec;padding-top:8px;margin-top:10px;break-inside:avoid;page-break-inside:avoid}</style></head><body>' + node.innerHTML + '</body></html>');
+        doc.close();
+        setTimeout(function () {
+          iframe.contentWindow.focus();
+          iframe.contentWindow.print();
+          setTimeout(function () { if (iframe.parentNode) iframe.parentNode.removeChild(iframe); }, 1000);
+        }, 200);
       }
 
       function renderMonthlyCost(){
         var sel=currentSelected();
         var mortgage=sel.payment.monthlyEquivalent;
-        el("mcMortgage").value=money(mortgage);
+        el("mcMortgage").value=money(mortgage)+" / month";
         var propTaxAuto=Math.round(propertyTaxAnnual(sel.price)/12);
         var ptField=el("mcPropertyTax");
         if(ptField&&(ptField.value===""||ptField.dataset.auto==="1")){ptField.value=propTaxAuto;ptField.dataset.auto="1";}
@@ -2668,7 +3086,7 @@
         var extras=propTax+condo+heat+hydro+ins+repair;
         var total=mortgage+extras;
         el("mcResult").innerHTML=
-          '<div class="mc-result-row"><span>Mortgage payment</span><strong>'+money(mortgage)+'</strong></div>'+
+          '<div class="mc-result-row"><span>Mortgage payment monthly equivalent</span><strong>'+money(mortgage)+'</strong></div>'+
           '<div class="mc-result-row"><span>Property tax</span><span>'+money(propTax)+'</span></div>'+
           (condo>0?'<div class="mc-result-row"><span>Condo / maintenance</span><span>'+money(condo)+'</span></div>':'')+
           '<div class="mc-result-row"><span>Heat</span><span>'+money(heat)+'</span></div>'+
@@ -2681,10 +3099,16 @@
         var f=el(id);if(f)f.addEventListener("input",function(){if(id==="mcPropertyTax")f.dataset.auto="0";renderMonthlyCost();});
       });
       el("openMonthlyCost").addEventListener("click",function(){renderMonthlyCost();openModal("monthlyCostModal");});
-      el("openLeadForm").addEventListener("click",function(){el("leadEstimateSummary").value=buildEstimateSummary();openModal("leadFormModal");});
-      el("mcToLead").addEventListener("click",function(){closeModal("monthlyCostModal");el("leadEstimateSummary").value=buildEstimateSummary();openModal("leadFormModal");});
+      var openLeadFormBtn = el("openLeadForm");
+      if(openLeadFormBtn)openLeadFormBtn.addEventListener("click",function(){el("leadEstimateSummary").value=buildEstimateSummary();openModal("leadFormModal");});
+      var mcToLeadBtn = el("mcToLead");
+      if(mcToLeadBtn)mcToLeadBtn.addEventListener("click",function(){closeModal("monthlyCostModal");el("leadEstimateSummary").value=buildEstimateSummary();openModal("leadFormModal");});
       var openEmail=el("openEmailForm");
       if(openEmail)openEmail.addEventListener("click",function(){el("emailEstimateSummary").value=buildEstimateSummary();openModal("emailFormModal");});
+      var openPrint=el("openPrintEstimate");
+      if(openPrint)openPrint.addEventListener("click",function(){updatePrintEstimate(currentSelected());el("printEstimateSummary").value=buildEstimateSummary();openModal("printEstimateModal");});
+      var printWithoutSharing=el("printWithoutSharing");
+      if(printWithoutSharing)printWithoutSharing.addEventListener("click",function(){updatePrintEstimate(currentSelected());closeModal("printEstimateModal");setTimeout(function(){printCleanEstimate();},80);});
 
       /* Lead form submission via Formspree (AJAX, no page reload) */
       el("leadForm").addEventListener("submit",function(e){
@@ -2692,13 +3116,21 @@
         var form=e.target;
         var err=el("leadError");
         var consent=el("leadConsent").checked;
-        if(!form.first_name.value||!form.last_name.value||!form.mobile.value||!form.email.value||!consent){
+        if(!form.first_name.value||!form.last_name.value||!form.mobile.value||!form.email.value||!consent||!validPhone(form.mobile.value,true)){
+          err.textContent = "Please enter your name, email, a valid 10-digit mobile number, and consent.";
           err.classList.add("show");return;
         }
+        form.mobile.value = formatPhoneValue(form.mobile.value);
         err.classList.remove("show");
         el("leadEstimateSummary").value=buildEstimateSummary();
+        var action = (form.getAttribute("action") || "").trim();
+        if (!action) {
+          err.textContent = "This request form still needs HubSpot connection. Please call or text 647-892-2411.";
+          err.classList.add("show");
+          return;
+        }
         var data=new FormData(form);
-        fetch(form.action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
+        fetch(action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
           .then(function(r){
             if(r.ok){form.style.display="none";el("leadSuccess").classList.add("show");}
             else{err.textContent="Something went wrong sending your request. Please call or text 647-892-2411.";err.classList.add("show");}
@@ -2715,13 +3147,50 @@
         if(!form.first_name.value||!form.email.value){err.classList.add("show");return;}
         err.classList.remove("show");
         el("emailEstimateSummary").value=buildEstimateSummary();
+        var action = (form.getAttribute("action") || "").trim();
+        if (!action) {
+          err.textContent = "This request form still needs HubSpot connection. Please call or text 647-892-2411.";
+          err.classList.add("show");
+          return;
+        }
         var data=new FormData(form);
-        fetch(form.action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
+        fetch(action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
           .then(function(r){
             if(r.ok){form.style.display="none";el("emailSuccess").classList.add("show");}
             else{err.textContent="Something went wrong. Please try again or call 647-892-2411.";err.classList.add("show");}
           })
           .catch(function(){err.textContent="Network error. Please try again or call 647-892-2411.";err.classList.add("show");});
+      });
+
+      /* Print/save-estimate soft capture submission */
+      var printForm=el("printForm");
+      if(printForm)printForm.addEventListener("submit",function(e){
+        e.preventDefault();
+        var form=e.target;
+        var err=el("printError");
+        var consent=el("printConsent").checked;
+        if(!form.first_name.value||!form.email.value||!consent||!validPhone(form.mobile.value,false)){
+          err.textContent = validPhone(form.mobile.value,false) ? "Please enter your first name, email and consent before sending." : "Please enter mobile as 10 digits, for example (647) 892-2411.";
+          err.classList.add("show");return;
+        }
+        if (form.mobile) form.mobile.value = formatPhoneValue(form.mobile.value);
+        err.classList.remove("show");
+        updatePrintEstimate(currentSelected());
+        el("printEstimateSummary").value=buildEstimateSummary();
+        var action = (form.getAttribute("action") || "").trim();
+        if (!action) {
+          form.style.display="none";
+          el("printSuccess").classList.add("show");
+          setTimeout(function(){printCleanEstimate();},650);
+          return;
+        }
+        var data=new FormData(form);
+        fetch(action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
+          .then(function(r){
+            if(r.ok){form.style.display="none";el("printSuccess").classList.add("show");setTimeout(function(){printCleanEstimate();},650);}
+            else{form.style.display="none";el("printSuccess").classList.add("show");setTimeout(function(){printCleanEstimate();},650);}
+          })
+          .catch(function(){form.style.display="none";el("printSuccess").classList.add("show");setTimeout(function(){printCleanEstimate();},650);});
       });
 
       /* Rate tip toast — shows when user scrolls up toward the rate banner on payment tab */
@@ -2855,7 +3324,7 @@
       "name": "What does amortization mean here?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Amortization is the full number of years used to pay the mortgage down to zero if the payment schedule and rate stayed as entered. A longer amortization usually lowers the payment but increases total interest."
+        "text": "Amortization is the full number of years selected for the mortgage calculation. A larger down payment usually lowers the payment and interest cost. It does not shorten the selected amortization unless you keep paying extra or choose an accelerated payment option."
       }
     },
     {
@@ -2983,7 +3452,7 @@
       "name": "Do non-resident taxes apply to every buyer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Non-resident speculation tax (NRST) only applies to foreign buyers and depends on status, property type, location and current rules. It is shown separately and only when it applies — a lawyer or tax professional should confirm your exact situation."
+        "text": "No. Non-resident speculation tax (NRST) only applies to foreign buyers and depends on buyer status, location and current rules. It is shown separately and only when it applies — a lawyer or tax professional should confirm your exact situation."
       }
     },
     {
